@@ -1,0 +1,3 @@
+#! /usr/bin/fish
+
+poetry run python ./src/pykn_nov_jam/main.py $argv
