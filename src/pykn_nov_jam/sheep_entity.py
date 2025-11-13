@@ -8,6 +8,8 @@ class SheepEntity(Entity):
         self,
         position: kn.Vec2,
         texture: kn.Texture | None = None,
+        flee_distance: float = 100.0,
+        seek_distance: float = 200.0,
     ) -> None:
         super().__init__(position, texture)
         if globals.Globals._instance is None:
@@ -16,8 +18,11 @@ class SheepEntity(Entity):
         else:
             self.player_entity = globals.Globals._instance.get_player_entity()
 
+        self.flee_distance = flee_distance
+        self.seek_distance = seek_distance
+
     def input(self) -> None:
-        self.input_direction = self.seek(True)
+        self.input_direction = self.seek()
 
     def update(self, dt: float) -> None:
         self.handle_velocity(dt)
@@ -66,13 +71,19 @@ class SheepEntity(Entity):
             else:
                 dir_to_player = self.player_entity.position - self.position
 
-            dir_to_player.normalize()
-            wish_velocity = dir_to_player * self.max_speed
-            steering = wish_velocity - self.velocity
+            if dir_to_player.length > self.flee_distance:
+                return kn.Vec2(0, 0)
+            else:
+                dir_to_player.normalize()
+                wish_velocity = dir_to_player * self.max_speed
+                steering = wish_velocity - self.velocity
 
-            if steering.length > 0:
-                steering.normalize()
-                return steering
+                if steering.length > 0:
+                    steering.normalize()
+                    return steering
 
         print("Player entity is None, cannot compute steering.")
         return kn.Vec2(0, 0)
+
+    def flee(self) -> kn.Vec2:
+        return self.seek(flee=True)

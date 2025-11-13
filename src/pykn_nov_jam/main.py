@@ -1,8 +1,8 @@
 import pykraken as kn
+import follow_camera as fc
 from player_entity import PlayerEntity
 from sheep_entity import SheepEntity
 from entity_manager import EntityManager
-import follow_camera as fc
 from globals import Globals
 
 
@@ -20,7 +20,6 @@ global_singleton.set_player_entity(entity_manager.entities[0])
 for i in range(5):
     entity_manager.add_entity(SheepEntity(kn.Vec2(100 + i * 32, 100), sheep_texture))
 
-
 main_camera = fc.FollowCamera(
     global_singleton.get_player_entity(), kn.Vec2(0, 0), 2.0, 0.8
 )
@@ -30,7 +29,7 @@ scale_shader = kn.ShaderState("assets/shaders/scale.spv", 1)
 while kn.window.is_open():
     kn.event.poll()
 
-    kn.renderer.clear(kn.color.DARK_GREY)
+    kn.renderer.clear(kn.color.BLACK)
     kn.draw.rect(kn.Rect(0, 0, 64, 64), kn.Color(50, 50, 50))
     kn.draw.rect(kn.Rect(0, 0, 100, 100), kn.color.RED)
     kn.draw.rect(kn.Rect(100, 200, 100, 100), kn.color.BLUE)
