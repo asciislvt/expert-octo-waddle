@@ -1,10 +1,9 @@
-from entity import Entity
-from player_entity import PlayerEntity
+from entities.entity import Entity
 
 
 class Globals:
     _instance: "Globals | None" = None
-    player_entity: PlayerEntity | None = None
+    player_entity: Entity | None = None
 
     def __init__(self) -> None:
         if Globals._instance is not None:
@@ -13,7 +12,7 @@ class Globals:
             Globals._instance = self
             print("Globals singleton instance created.")
 
-    def set_player_entity(self, entity: PlayerEntity) -> None:
+    def set_player_entity(self, entity: Entity) -> None:
         self.player_entity = entity
 
     def get_player_entity(self) -> Entity | None:

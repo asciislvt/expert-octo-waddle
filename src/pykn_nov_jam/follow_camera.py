@@ -1,5 +1,5 @@
 import pykraken as kn
-from entity import Entity
+from entities.entity import Entity
 
 
 class FollowCamera(kn.Camera):
