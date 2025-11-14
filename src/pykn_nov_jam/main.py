@@ -2,10 +2,11 @@ import pykraken as kn
 import follow_camera as fc
 
 from globals import Globals
-from components.key_input_component import KeyInputComponent
+from entities.entity import Entity
+from components.key_input_component import InputComponent
 from components.movement_component import MovementComponent
 from components.sprite_component import SpriteComponent
-from entities.entity import Entity
+from components.ai.ai_steering_component import AiSteeringComponent
 
 
 kn.init()
@@ -13,12 +14,23 @@ kn.window.create("Kraken Example", kn.Vec2(480, 432))
 
 global_singleton = Globals()
 
-player = Entity(kn.Vec2(240, 216))
-player.add_component(KeyInputComponent(player))
-player.add_component(SpriteComponent(player, "assets/player.png"))
-player.add_component(MovementComponent(player, 200, 50, 100))
+entities = []
 
+player: Entity = Entity(kn.Vec2(240, 216))
+
+player.add_component(InputComponent(player))
+player.add_component(SpriteComponent(player, "assets/player.png"))
+player.add_component(MovementComponent(player, 160, 12, 100))
 global_singleton.set_player_entity(player)
+entities.append(player)
+
+for i in range(5):
+    ent = Entity(kn.Vec2(50 * i + 100, 50 * i + 100))
+    ent.add_component(AiSteeringComponent(ent, player))
+    ent.add_component(SpriteComponent(ent, "assets/sheep.png"))
+    ent.add_component(MovementComponent(ent, 58, 10, 15))
+    entities.append(ent)
+
 
 main_camera = fc.FollowCamera(
     global_singleton.get_player_entity(), kn.Vec2(0, 0), 2.0, 0.8
@@ -34,10 +46,11 @@ while kn.window.is_open():
     kn.draw.rect(kn.Rect(0, 0, 100, 100), kn.color.RED)
     kn.draw.rect(kn.Rect(100, 200, 100, 100), kn.color.BLUE)
 
-    for component in player.component_collection.values():
-        component.process_input()
-        component.process_update(kn.time.get_delta())
-        component.process_draw()
+    for entity in entities:
+        for component in entity.component_collection.values():
+            component.process_input()
+            component.process_update(kn.time.get_delta())
+            component.process_draw()
 
     main_camera.update(kn.time.get_delta())
     scale_shader.set_uniform(0, main_camera.uniform_buffer.to_bytes())

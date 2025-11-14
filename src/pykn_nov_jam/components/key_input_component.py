@@ -3,8 +3,8 @@ from entities.entity import Entity
 from components.component import Component
 
 
-class KeyInputComponent(Component):
-    def __init__(self, entity: Entity):
+class InputComponent(Component):
+    def __init__(self, entity: Entity) -> None:
         super().__init__(entity)
         self.input_direction: kn.Vec2 = kn.Vec2(0, 0)
 
