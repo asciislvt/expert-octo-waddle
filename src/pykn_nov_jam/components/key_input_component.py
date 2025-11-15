@@ -9,6 +9,9 @@ class InputComponent(Component):
         self.input_direction: kn.Vec2 = kn.Vec2(0, 0)
 
     def process_input(self) -> None:
+        if self.enabled is False:
+            return
+
         self.input_direction = kn.Vec2(0, 0)
         self.input_direction.y = kn.key.is_pressed(kn.K_s) - kn.key.is_pressed(kn.K_w)
         self.input_direction.x = kn.key.is_pressed(kn.K_d) - kn.key.is_pressed(kn.K_a)

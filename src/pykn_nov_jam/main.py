@@ -1,36 +1,24 @@
-import pykraken as kn
 import follow_camera as fc
-
+import pykraken as kn
+from entities.entity_prefabs import EntityPrefabs
 from globals import Globals
-from entities.entity import Entity
-from components.key_input_component import InputComponent
-from components.movement_component import MovementComponent
-from components.sprite_component import SpriteComponent
-from components.ai.ai_steering_component import AiSteeringComponent
 
 
 kn.init()
-kn.window.create("Kraken Example", kn.Vec2(480, 432))
-
-global_singleton = Globals()
+kn.window.create("The Herdsman", kn.Vec2(480, 432))
+kn.time.set_target(30)
 
 entities = []
+global_singleton = Globals()
 
-player: Entity = Entity(kn.Vec2(240, 216))
-
-player.add_component(InputComponent(player))
-player.add_component(SpriteComponent(player, "assets/player.png"))
-player.add_component(MovementComponent(player, 160, 12, 100))
-global_singleton.set_player_entity(player)
+player = EntityPrefabs.create_player(kn.Vec2(240, 216), global_singleton)
 entities.append(player)
 
 for i in range(5):
-    ent = Entity(kn.Vec2(50 * i + 100, 50 * i + 100))
-    ent.add_component(AiSteeringComponent(ent, player))
-    ent.add_component(SpriteComponent(ent, "assets/sheep.png"))
-    ent.add_component(MovementComponent(ent, 58, 10, 15))
-    entities.append(ent)
-
+    sheep = EntityPrefabs.create_sheep(
+        kn.Vec2(50 * i + 50, 50), global_singleton.get_player_entity()
+    )
+    entities.append(sheep)
 
 main_camera = fc.FollowCamera(
     global_singleton.get_player_entity(), kn.Vec2(0, 0), 2.0, 0.8

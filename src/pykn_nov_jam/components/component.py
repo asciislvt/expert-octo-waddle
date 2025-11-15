@@ -1,6 +1,7 @@
 class Component:
     def __init__(self, entity) -> None:
         self.entity = entity
+        self.enabled: bool = True
 
     def process_update(self, delta_time: float) -> None:
         pass

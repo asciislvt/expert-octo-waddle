@@ -17,6 +17,9 @@ class MovementComponent(Component):
         # self.input: InputComponent = entity.get_component(InputComponent)  # type: ignore
 
     def process_update(self, delta_time: float) -> None:
+        if self.enabled is False:
+            return
+
         self.velocity -= self.velocity * self.decel * delta_time
 
         input_component: InputComponent | None = self.entity.get_component(
