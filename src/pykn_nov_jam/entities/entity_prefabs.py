@@ -39,7 +39,7 @@ class EntityPrefabs:
     def create_static_object(position: kn.Vec2) -> Entity:
         static_object: Entity = Entity(position)
 
-        static_object.add_component(SpriteComponent(static_object, "", 16, 16))
+        static_object.add_component(SpriteComponent(static_object, None, 16, 16))
         static_object.add_component(
             CollisionComponent(static_object, kn.Rect(static_object.position, 16, 16))
         )

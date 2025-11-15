@@ -3,6 +3,9 @@ class Component:
         self.entity = entity
         self.enabled: bool = True
 
+    def process_physics(self, delta_time: float) -> None:
+        pass
+
     def process_update(self, delta_time: float) -> None:
         pass
 

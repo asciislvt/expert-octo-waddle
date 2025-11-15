@@ -11,10 +11,10 @@ class CollisionComponent(Component):
             self.collider: kn.Rect = kn.Rect()
         else:
             self.collider = collider
-        print(
-            "CollisionComponent created for entity %s with collider %r"
-            % (entity, self.collider)
-        )
+        # print(
+        #     "CollisionComponent created for entity %s with collider %r"
+        #     % (entity, self.collider)
+        # )
 
     def process_update(self, delta_time: float) -> None:
         if self.enabled is False:

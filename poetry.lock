@@ -14,24 +14,24 @@ files = [
 
 [[package]]
 name = "kraken-engine"
-version = "1.2.1"
+version = "1.3.1"
 description = "Python bindings for Kraken Engine"
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "kraken_engine-1.2.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:8aa984f05063e563930bac9c564c847da81b454f99965f44c09b4902b1f8817f"},
-    {file = "kraken_engine-1.2.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:99316ce7fde545fa67d6611e3b3812802e6dddfd057c0fb56b91dd2c2a8e4ad8"},
-    {file = "kraken_engine-1.2.1-cp311-cp311-win_amd64.whl", hash = "sha256:0ee31f6cf38c2ba463aa5010bdbce810762b5c745b975dd0841b8e1a8e7e7c70"},
-    {file = "kraken_engine-1.2.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:be060d0247082c48901b8d65de2f721ec9d00f5dcd1de918e8b6b9969c85243f"},
-    {file = "kraken_engine-1.2.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a1e47469c42876bc431bec4528c66cec79db91bf8a236a719605f1f6a313a2e8"},
-    {file = "kraken_engine-1.2.1-cp312-cp312-win_amd64.whl", hash = "sha256:96e93783b80f87df20faa1825e92c67804e8787e71d44da23691c525ef80b0cd"},
-    {file = "kraken_engine-1.2.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:d9d918b9506c49628cf9cd3db6d9005e035df174437e87487fef80950c8d993d"},
-    {file = "kraken_engine-1.2.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:8e7c0acae9e0e14e6750af5edb5d0b8af50ff25a792a5652bd066cc03de3f7b8"},
-    {file = "kraken_engine-1.2.1-cp313-cp313-win_amd64.whl", hash = "sha256:c14640fc283dc0857269839887acbbfcbd70ef52ab332bdf58c1e33f611198a2"},
-    {file = "kraken_engine-1.2.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:643b7a49f3634189678fee479fefd5a62f3d8a3aacdd2bb803c08e1db3bd850d"},
-    {file = "kraken_engine-1.2.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d16dce3d1eef3ecb0f3f08241883d6e5c25bcedec95d4e494fdae92d43696f57"},
-    {file = "kraken_engine-1.2.1-cp314-cp314-win_amd64.whl", hash = "sha256:3ba5e4134d0684e2e6655f3f1fb10ec4319cc04e1a5e578e5ee174e2919d136e"},
+    {file = "kraken_engine-1.3.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:6c4499a770a6018c8406c930ccf3e1cf2738d9fc9d9a712b6b41c0ed65b8b82e"},
+    {file = "kraken_engine-1.3.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ab1793163a701cb4b24421857a04c69b9c0e6fd9ae73ed0661a37e925379a654"},
+    {file = "kraken_engine-1.3.1-cp311-cp311-win_amd64.whl", hash = "sha256:2fff6b602becfcf0e153c556d607f271e815ee21cd960805fb878a7319ac96fe"},
+    {file = "kraken_engine-1.3.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:1e9bf4bc403f7ac6d82081a29ea1691b3a5fc290ba83e2d9088d627368bcc165"},
+    {file = "kraken_engine-1.3.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:8548b9b9f6dd2c57b5c2c55b2aa2ef78a1d081a55e46bc48d1e649c8f098f48e"},
+    {file = "kraken_engine-1.3.1-cp312-cp312-win_amd64.whl", hash = "sha256:5dfbaf3ff3a74385a82f507ab52d3410f55d27065eb353d80b1e868211c6a258"},
+    {file = "kraken_engine-1.3.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:753bd64c5fc7e38c4a2cab70f89823c8538dd4adfcf5a9dabf50cc275896f598"},
+    {file = "kraken_engine-1.3.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:71eb0fc8f133f968f3485104762802955053c2ca7eb8feb2aea09db1e900b598"},
+    {file = "kraken_engine-1.3.1-cp313-cp313-win_amd64.whl", hash = "sha256:9868bdac7b7ce717503f61f959b205bf51336f414ad0017ec706caf081af0b75"},
+    {file = "kraken_engine-1.3.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:34824ebee2f3d90232b0f5e910e652c80f91040ba445eac036b947eb707aef23"},
+    {file = "kraken_engine-1.3.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:78a236c2138c6b3ad421dac014fe92d2726dbf2624b26439930cef5fdbb81591"},
+    {file = "kraken_engine-1.3.1-cp314-cp314-win_amd64.whl", hash = "sha256:59408b12d2b12db8d70329d35589796fe6d63e260debc62c69c470106ef2c59c"},
 ]
 
 [package.dependencies]
