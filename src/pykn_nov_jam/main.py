@@ -1,11 +1,11 @@
-import follow_camera as fc
 import pykraken as kn
-from entities.entity_manager import EntityManager
-from entities.entity_prefabs import EntityPrefabs
-from systems.collision_system import CollisionSystem
-from globals import Globals
-from spatial_hash import SpatialHash
 
+from pykn_nov_jam.follow_camera import FollowCamera
+from pykn_nov_jam.entities.entity_manager import EntityManager
+from pykn_nov_jam.entities.entity_prefabs import EntityPrefabs
+from pykn_nov_jam.globals import Globals
+from pykn_nov_jam.spatial_hash import SpatialHash
+from pykn_nov_jam.systems.collision_system import CollisionSystem
 
 kn.init()
 kn.window.create("The Herdsman", kn.Vec2(480, 432))
@@ -23,13 +23,13 @@ for i in range(10):
     static_object = EntityPrefabs.create_static_object(kn.Vec2(50 * i + 50, 198))
     entities.add_entity(static_object)
 
-# for i in range(5):
-#     sheep = EntityPrefabs.create_sheep(
-#         kn.Vec2(50 * i + 50, 50), global_singleton.get_player_entity()
-#     )
-#     entities.append(sheep)
+for i in range(5):
+    sheep = EntityPrefabs.create_sheep(
+        kn.Vec2(50 * i + 50, 50), global_singleton.get_player_entity()
+    )
+    entities.add_entity(sheep)
 
-main_camera = fc.FollowCamera(
+main_camera = FollowCamera(
     global_singleton.get_player_entity(), kn.Vec2(0, 0), 2.0, 0.8
 )
 main_camera.set()
@@ -46,11 +46,10 @@ while kn.window.is_open():
 
     for entity in entities.get_entities():
         for component in entity.component_collection.values():
+            collision_system.process_components(kn.time.get_delta())
             component.process_input()
             component.process_update(kn.time.get_delta())
             component.process_draw()
-
-    collision_system.process_components(kn.time.get_delta())
 
     main_camera.update(kn.time.get_delta())
     scale_shader.set_uniform(0, main_camera.uniform_buffer.to_bytes())

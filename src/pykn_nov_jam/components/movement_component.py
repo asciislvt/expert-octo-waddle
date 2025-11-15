@@ -1,7 +1,7 @@
 from pykraken import Vec2
-from entities.entity import Entity
-from components.component import Component
-from components.key_input_component import InputComponent
+from pykn_nov_jam.entities.entity import Entity
+from pykn_nov_jam.components.component import Component
+from pykn_nov_jam.components.key_input_component import InputComponent
 
 
 class MovementComponent(Component):
@@ -14,7 +14,6 @@ class MovementComponent(Component):
         self.accel: float = accel
         self.decel: float = decel
         self.max_speed: float = max_speed
-        # self.input: InputComponent = entity.get_component(InputComponent)  # type: ignore
 
     def process_update(self, delta_time: float) -> None:
         if self.enabled is False:

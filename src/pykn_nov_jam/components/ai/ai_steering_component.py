@@ -1,7 +1,7 @@
 import pykraken as kn
-from entities.entity import Entity
-from components.key_input_component import InputComponent
-from components.movement_component import MovementComponent
+from pykn_nov_jam.entities.entity import Entity
+from pykn_nov_jam.components.key_input_component import InputComponent
+from pykn_nov_jam.components.movement_component import MovementComponent
 
 
 class AiSteeringComponent(InputComponent):

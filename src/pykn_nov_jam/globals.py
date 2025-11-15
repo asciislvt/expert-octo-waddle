@@ -1,4 +1,4 @@
-from entities.entity import Entity
+from pykn_nov_jam.entities.entity import Entity
 
 
 class Globals:

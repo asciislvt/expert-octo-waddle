@@ -1,5 +1,5 @@
-from entities.entity import Entity
-from components.component import Component
+from pykn_nov_jam.entities.entity import Entity
+from pykn_nov_jam.components.component import Component
 
 
 class EntityManager:

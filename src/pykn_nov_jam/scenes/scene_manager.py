@@ -1,4 +1,4 @@
-from scenes.scene import Scene
+from pykn_nov_jam.scenes.scene import Scene
 
 
 class SceneManager:
