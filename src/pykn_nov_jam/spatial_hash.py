@@ -20,7 +20,6 @@ class SpatialHash:
         cell_ids = self.get_cell_ids(entity)
 
         for cell_id in cell_ids:
-            print("Inserting entity %r into cell %r" % (entity, cell_id))
             if cell_id not in self.cells.keys():
                 self.cells[cell_id] = []
             self.cells[cell_id].append(entity)
@@ -28,13 +27,22 @@ class SpatialHash:
     def get_cells(self) -> dict[kn.Vec2, list[Entity]]:
         return self.cells
 
-    def get_nearby_entities(self, cell_position: kn.Vec2) -> list[Entity]:
+    def get_neighbor_entities(self, entity: Entity) -> list[Entity]:
         result: list[Entity] = []
-        neighbor_cells = self.get_neighbor_cells(cell_position)
+        neighbor_cells = []
+        cell_ids = self.get_cell_ids(entity)
 
-        for cell in neighbor_cells:
-            for entity in self.cells[cell]:
-                result.append(entity)
+        for cell_id in cell_ids:
+            neighbor_cells.extend(self.get_neighbor_cells(cell_id))
+
+        for neighbor_cell in neighbor_cells:
+            for entity_in_cell in self.cells[neighbor_cell]:
+                if entity_in_cell == entity:
+                    continue
+                if entity_in_cell in result:
+                    continue
+
+                result.append(entity_in_cell)
 
         return result
 

@@ -1,7 +1,8 @@
 from typing import override
 
-from pykraken import Vec2
+from pykraken import Vec2, math
 
+from pykn_nov_jam.systems.collision_system import CollisionSystem
 from pykn_nov_jam.components.component import Component
 from pykn_nov_jam.components.key_input_component import InputComponent
 from pykn_nov_jam.entities.entity import Entity
@@ -13,6 +14,9 @@ class MovementComponent(Component):
     ) -> None:
         super().__init__(entity)
         self.entity: Entity = entity
+        self.input_component: InputComponent | None = entity.get_component(
+            InputComponent
+        )  # type: ignore
         self.velocity: Vec2 = Vec2(0, 0)
         self.prev_velocity: Vec2 = Vec2(0, 0)
         self.prev_position: Vec2 = entity.position.copy()
@@ -33,20 +37,38 @@ class MovementComponent(Component):
 
         self.prev_position = self.entity.position.copy()
         self.prev_velocity = self.velocity.copy()
-        self.velocity -= self.velocity * self.decel * delta_time
 
-        input_component: InputComponent | None = self.entity.get_component(
-            InputComponent
-        )  # pyright: ignore[reportAssignmentType]
+        self.move(delta_time)
 
-        if input_component is None:
-            print("No InputComponent found in MovementComponent")
-            return
+        if CollisionSystem._instance is not None:
+            predicted_position = self.entity.position + self.velocity * delta_time
+            will_collide, normal = CollisionSystem._instance.predict_collision(
+                self.entity,
+                predicted_position,
+            )
+            if will_collide:
+                print(
+                    f"----\nPREDICT - Velocity before: {self.velocity}, Normal: {normal}"
+                )
+                velocty_along_normal = math.dot(self.velocity, normal)
+                if velocty_along_normal < 0:
+                    self.velocity -= normal * velocty_along_normal
 
-        wish_speed = input_component.input_direction.length * self.max_speed
-        self.accelerate(input_component.input_direction, wish_speed, delta_time)
+                print(f"PREDICT - Velocity after: {self.velocity}\n----")
 
         self.entity.position += self.velocity * delta_time
+
+    def move(self, delta_time: float) -> None:
+        if self.input_component is None:
+            print("No InputComponent found in MovementComponent")
+            input_component: InputComponent | None = self.entity.get_component(
+                InputComponent
+            )  # pyright: ignore[reportAssignmentType]
+            return
+
+        self.velocity -= self.velocity * self.decel * delta_time
+        wish_speed = self.input_component.input_direction.length * self.max_speed
+        self.accelerate(self.input_component.input_direction, wish_speed, delta_time)
 
     def accelerate(self, wish_dir: Vec2, wish_speed: float, delta_time: float) -> None:
         current_speed = 0

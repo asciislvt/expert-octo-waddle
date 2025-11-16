@@ -1,13 +1,17 @@
 import pykraken as kn
 from pykn_nov_jam.components.collision_component import CollisionComponent
-from pykn_nov_jam.components.movement_component import MovementComponent
+
 from pykn_nov_jam.entities.entity_manager import EntityManager
 from pykn_nov_jam.entities.entity import Entity
 from pykn_nov_jam.spatial_hash import SpatialHash
 
 
 class CollisionSystem:
+    _instance: "CollisionSystem | None" = None
+
     def __init__(self):
+        CollisionSystem._instance = self
+        print("CollisionSystem initialized")
         pass
 
     def process_components(self, delta_time: float) -> None:
@@ -31,10 +35,6 @@ class CollisionSystem:
 
             for entity_a in cells[cell_position]:
                 for entity_b in cells[cell_position]:
-                    # print(
-                    #     "---\nChecking collision between %s and %s \n Cell Position: %s\n---"
-                    #     % (entity_a, entity_b, cell_position)
-                    # )
                     if entity_a == entity_b:
                         continue
                     if cell_list.index(entity_a) >= cell_list.index(entity_b):
@@ -52,14 +52,34 @@ class CollisionSystem:
                     ):
                         self.handle_collision(entity_a, entity_b)
 
-    #                 if cell_list.index(entity_a) < cell_list.index(entity_b):
-    #                     if self.check_collision(
-    #                         collision_a.get_collider(), collision_b.get_collider()
-    #                     ):
-    #                         self.handle_collision(entity_a, entity_b)
-    #                 else:
-    #                     continue
-    #
+    def predict_collision(
+        self, entity: Entity, target_position: kn.Vec2
+    ) -> tuple[bool, kn.Vec2]:
+        if SpatialHash._instance is None:
+            print("CollisionSystem: SpatialHash not initialized.")
+            return (False, kn.Vec2(0, 0))
+
+        neighbors = SpatialHash._instance.get_neighbor_entities(entity)
+        for neighbor in neighbors:
+            neighbor_collision: CollisionComponent = neighbor.get_component(  # type: ignore
+                CollisionComponent
+            )
+            collision_component: CollisionComponent = entity.get_component(  # type: ignore
+                CollisionComponent
+            )
+
+            neighbor_collider: kn.Rect = neighbor_collision.get_collider()
+            collider = collision_component.get_collider().copy()
+            collider.x = target_position.x - (collider.w / 2)
+            collider.y = target_position.y - (collider.h / 2)
+
+            if self.is_colliding(collider, neighbor_collider):
+                normal = self.get_collision_direction(collider, neighbor_collider)
+                normal.normalize()
+                return (True, normal)
+
+        return (False, kn.Vec2(0, 0))
+
     def is_colliding(self, rect_1: kn.Rect, rect_2: kn.Rect) -> bool:
         if (
             rect_1.left < rect_2.right
@@ -96,7 +116,6 @@ class CollisionSystem:
         #     collision_b.on_collide(entity_b, entity_a)
 
     def resolve_collision(self, entity_a: Entity, entity_b: Entity) -> None:
-        print("Resolving collision between %s and %s" % (entity_a, entity_b))
         collision_a: CollisionComponent = entity_a.get_component(  # type: ignore
             CollisionComponent
         )
@@ -107,19 +126,24 @@ class CollisionSystem:
         rect_a = collision_a.get_collider()
         rect_b = collision_b.get_collider()
 
+        resolve_vector = self.get_collision_direction(rect_a, rect_b)
+        entity_a.position += resolve_vector
+
+    def get_collision_direction(self, rect_a: kn.Rect, rect_b: kn.Rect) -> kn.Vec2:
         diff_x = min(rect_a.right, rect_b.right) - max(rect_a.left, rect_b.left)
         diff_y = min(rect_a.bottom, rect_b.bottom) - max(rect_a.top, rect_b.top)
 
+        margin = 0.0001
         resolve_vector = kn.Vec2(0, 0)
         if diff_x < diff_y:
             if rect_a.center.x < rect_b.center.x:
-                resolve_vector.x = -diff_x
+                resolve_vector.x = -(diff_x + margin)
             else:
-                resolve_vector.x = diff_x
+                resolve_vector.x = diff_x + margin
         else:
             if rect_a.center.y < rect_b.center.y:
-                resolve_vector.y = -diff_y
+                resolve_vector.y = -(diff_y + margin)
             else:
-                resolve_vector.y = diff_y
+                resolve_vector.y = diff_y + margin
 
-        entity_a.position += resolve_vector
+        return resolve_vector
