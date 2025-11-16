@@ -9,12 +9,14 @@ class AiSteeringComponent(InputComponent):
         self,
         entity: Entity,
         target_entity: Entity | None = None,
+        fleeing: bool = False,
     ) -> None:
         super().__init__(entity)
+        self.fleeing: bool = fleeing
         self.target_entity: Entity | None = target_entity
 
     def process_input(self) -> None:
-        steering = self.seek(True)
+        steering = self.seek(self.fleeing)
         self.input_direction = steering
 
     def seek(self, flee: bool = False) -> kn.Vec2:

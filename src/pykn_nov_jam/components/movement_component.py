@@ -1,7 +1,10 @@
+from typing import override
+
 from pykraken import Vec2
-from pykn_nov_jam.entities.entity import Entity
+
 from pykn_nov_jam.components.component import Component
 from pykn_nov_jam.components.key_input_component import InputComponent
+from pykn_nov_jam.entities.entity import Entity
 
 
 class MovementComponent(Component):
@@ -11,19 +14,30 @@ class MovementComponent(Component):
         super().__init__(entity)
         self.entity: Entity = entity
         self.velocity: Vec2 = Vec2(0, 0)
+        self.prev_velocity: Vec2 = Vec2(0, 0)
+        self.prev_position: Vec2 = entity.position.copy()
         self.accel: float = accel
         self.decel: float = decel
         self.max_speed: float = max_speed
 
+    def get_speed(self) -> float:
+        return self.velocity.length
+
+    def get_position_delta(self) -> Vec2:
+        return self.entity.position - self.prev_position
+
+    @override
     def process_update(self, delta_time: float) -> None:
         if self.enabled is False:
             return
 
+        self.prev_position = self.entity.position.copy()
+        self.prev_velocity = self.velocity.copy()
         self.velocity -= self.velocity * self.decel * delta_time
 
         input_component: InputComponent | None = self.entity.get_component(
             InputComponent
-        )  # type: ignore
+        )  # pyright: ignore[reportAssignmentType]
 
         if input_component is None:
             print("No InputComponent found in MovementComponent")

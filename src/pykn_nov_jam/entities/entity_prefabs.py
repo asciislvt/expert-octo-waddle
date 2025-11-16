@@ -15,9 +15,7 @@ def _player_on_collide(player: Entity, other_entity: Entity) -> None:
             CollisionComponent
         )  # type: ignore
         if other_collision.body_type == "static":
-            print("Player collided with static object: %s" % other_entity)
             movement: MovementComponent = player.get_component(MovementComponent)  # type: ignore
-            movement.velocity = kn.Vec2(300, 300)
 
 
 class EntityPrefabs:
@@ -42,10 +40,12 @@ class EntityPrefabs:
         return player
 
     @staticmethod
-    def create_sheep(position: kn.Vec2, target_entity: Entity | None) -> Entity:
+    def create_sheep(
+        position: kn.Vec2, target_entity: Entity | None, fleeing: bool = False
+    ) -> Entity:
         sheep: Entity = Entity(position)
 
-        sheep.add_component(AiSteeringComponent(sheep, target_entity))
+        sheep.add_component(AiSteeringComponent(sheep, target_entity, fleeing))
         sheep.add_component(SpriteComponent(sheep, "assets/sprites/sheep.png"))
         sheep.add_component(MovementComponent(sheep, 70, 10, 30))
         sheep.add_component(CollisionComponent(sheep, kn.Rect(sheep.position, 16, 16)))
@@ -54,13 +54,15 @@ class EntityPrefabs:
         return sheep
 
     @staticmethod
-    def create_static_object(position: kn.Vec2) -> Entity:
+    def create_static_object(
+        position: kn.Vec2, width: int = 16, height: int = 16
+    ) -> Entity:
         static_object: Entity = Entity(position)
 
-        static_object.add_component(SpriteComponent(static_object, None, 16, 16))
+        static_object.add_component(SpriteComponent(static_object, None, width, height))
         static_object.add_component(
             CollisionComponent(
-                static_object, kn.Rect(static_object.position, 16, 16), "static"
+                static_object, kn.Rect(static_object.position, width, height), "static"
             )
         )
 

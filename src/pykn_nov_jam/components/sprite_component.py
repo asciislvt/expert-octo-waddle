@@ -1,3 +1,4 @@
+from typing import override
 import pykraken as kn
 from pykn_nov_jam.components.component import Component
 from pykn_nov_jam.entities.entity import Entity
@@ -25,6 +26,7 @@ class SpriteComponent(Component):
         else:
             self.sprite = kn.Texture(self.sprite_path)
 
+    @override
     def process_draw(self) -> None:
         if self.enabled is False:
             return
@@ -32,8 +34,8 @@ class SpriteComponent(Component):
         if self.sprite is None:
             kn.draw.rect(
                 kn.Rect(
-                    self.entity.position.x - 8,
-                    self.entity.position.y - 8,
+                    self.entity.position.x - self.width / 2,
+                    self.entity.position.y - self.height / 2,
                     self.width,
                     self.height,
                 ),
