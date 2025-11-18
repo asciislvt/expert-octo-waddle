@@ -10,6 +10,7 @@ class EntityManager:
         self.entities: list[Entity] = []
 
     def add_entity(self, entity: Entity) -> None:
+        print(f"Adding entity: {entity}")
         self.entities.append(entity)
 
     def remove_entity(self, entity: Entity) -> None:

@@ -1,19 +1,19 @@
 {
-	"identifier": "Level_1",
-	"uniqueIdentifer": "e08c5ec0-ac70-11f0-9083-11da53dfe6a8",
-	"x": 256,
+	"identifier": "Scene_0",
+	"uniqueIdentifer": "729039b0-ac70-11f0-a730-79f8c184dc51",
+	"x": 0,
 	"y": 0,
 	"width": 256,
 	"height": 256,
 	"bgColor": "#000000",
 	"neighbourLevels": [
 		{
-			"levelIid": "729039b0-ac70-11f0-a730-79f8c184dc51",
-			"dir": "w"
+			"levelIid": "e08c5ec0-ac70-11f0-9083-11da53dfe6a8",
+			"dir": "e"
 		}
 	],
 	"customFields": {
-		"level_names": []
+		"camera_target": ""
 	},
 	"layers": [
 		"Floor_level.png"
@@ -22,10 +22,10 @@
 		"Player": [
 			{
 				"id": "Player",
-				"iid": "e3e88210-ac70-11f0-9083-95ddccbeedd1",
+				"iid": "01712280-ac70-11f0-a730-d3cfda5e6ec5",
 				"layer": "Entities",
-				"x": 168,
-				"y": 80,
+				"x": 80,
+				"y": 48,
 				"width": 8,
 				"height": 8,
 				"color": 3129022,

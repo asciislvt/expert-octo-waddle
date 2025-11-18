@@ -10,8 +10,11 @@ class CollisionSystem:
     _instance: "CollisionSystem | None" = None
     prediction_steps: int = 3
 
-    def __init__(self, prediction_steps: int = 3):
+    def __init__(
+        self, prediction_steps: int = 3, entity_manager: EntityManager | None = None
+    ) -> None:
         CollisionSystem._instance = self
+        entity_manager = entity_manager
         CollisionSystem.prediction_steps = prediction_steps
         print("CollisionSystem initialized")
         pass

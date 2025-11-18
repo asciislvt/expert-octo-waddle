@@ -10,8 +10,8 @@
 	},
 	"iid": "728feb90-ac70-11f0-a730-e5718d199314",
 	"jsonVersion": "1.5.3",
-	"appBuildId": 489801,
-	"nextUid": 13,
+	"appBuildId": 489766,
+	"nextUid": 14,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -36,7 +36,7 @@
 	"backupOnSave": false,
 	"backupLimit": 10,
 	"backupRelPath": null,
-	"levelNamePattern": "Level_%idx",
+	"levelNamePattern": "Scene_%idx",
 	"tutorialDesc": null,
 	"customCommands": [],
 	"flags": [],
@@ -319,12 +319,12 @@
 		}
 	], "enums": [], "externalEnums": [], "levelFields": [
 		{
-			"identifier": "level_names",
-			"doc": "List of level names to use for loading",
-			"__type": "Array<String>",
-			"uid": 11,
+			"identifier": "camera_target",
+			"doc": null,
+			"__type": "String",
+			"uid": 13,
 			"type": "F_String",
-			"isArray": true,
+			"isArray": false,
 			"canBeNull": false,
 			"arrayMinLength": null,
 			"arrayMaxLength": null,
@@ -345,10 +345,7 @@
 			"max": null,
 			"regex": null,
 			"acceptFileTypes": null,
-			"defaultOverride": {
-				"id": "V_String",
-				"params": ["New Scene"]
-			},
+			"defaultOverride": null,
 			"textLanguageMode": null,
 			"symmetricalRef": false,
 			"autoChainRef": true,
@@ -361,7 +358,7 @@
 	] },
 	"levels": [
 		{
-			"identifier": "Level_0",
+			"identifier": "Scene_0",
 			"iid": "729039b0-ac70-11f0-a730-79f8c184dc51",
 			"uid": 0,
 			"worldX": 0,
@@ -379,13 +376,7 @@
 			"__smartColor": "#737373",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "level_names", "__type": "Array<String>", "__value": [ "Level_0", "Level_1" ], "__tile": null, "defUid": 11, "realEditorValues": [ {
-				"id": "V_String",
-				"params": ["Level_0"]
-			}, {
-				"id": "V_String",
-				"params": ["Level_1"]
-			} ] }],
+			"fieldInstances": [{ "__identifier": "camera_target", "__type": "String", "__value": "", "__tile": null, "defUid": 13, "realEditorValues": [] }],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -579,7 +570,7 @@
 			"__neighbours": [{ "levelIid": "e08c5ec0-ac70-11f0-9083-11da53dfe6a8", "dir": "e" }]
 		},
 		{
-			"identifier": "Level_1",
+			"identifier": "Scene_1",
 			"iid": "e08c5ec0-ac70-11f0-9083-11da53dfe6a8",
 			"uid": 10,
 			"worldX": 256,
@@ -597,7 +588,7 @@
 			"__smartColor": "#737373",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "level_names", "__type": "Array<String>", "__value": [], "__tile": null, "defUid": 11, "realEditorValues": [] }],
+			"fieldInstances": [{ "__identifier": "camera_target", "__type": "String", "__value": "", "__tile": null, "defUid": 13, "realEditorValues": [] }],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",

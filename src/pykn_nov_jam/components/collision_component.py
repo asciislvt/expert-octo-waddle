@@ -34,3 +34,9 @@ class CollisionComponent(Component):
 
         self.collider.x = self.entity.position.x - (self.collider.w / 2)
         self.collider.y = self.entity.position.y - (self.collider.h / 2)
+
+    # def process_draw(self) -> None:
+    #     if self.enabled is False:
+    #         return
+    #
+    #     kn.draw.rect(self.collider, kn.color.RED)

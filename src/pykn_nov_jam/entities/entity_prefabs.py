@@ -35,7 +35,7 @@ class EntityPrefabs:
         player.add_component(
             CollisionComponent(
                 player,
-                kn.Rect(player.position, 16, 16),
+                kn.Rect(player.position, 14, 14),
                 "dynamic",
                 on_collide=_player_on_collide,
             )
@@ -74,3 +74,19 @@ class EntityPrefabs:
 
         print("Static object entity created at position: %r" % position)
         return static_object
+
+    @staticmethod
+    def create_collision_block(position: kn.Vec2, collision_rect: kn.Rect) -> Entity:
+        pos: kn.Vec2 = kn.Vec2(collision_rect.x, collision_rect.y)
+        collision_block: Entity = Entity(pos)
+
+        collision_block.add_component(
+            CollisionComponent(
+                collision_block,
+                collision_rect,
+                "static",
+            )
+        )
+
+        print("Collision block entity created at position: %r" % position)
+        return collision_block
