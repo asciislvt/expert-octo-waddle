@@ -2,10 +2,10 @@ from typing import override
 
 from pykraken import Vec2, math
 
-from pykn_nov_jam.systems.collision_system import CollisionSystem
 from pykn_nov_jam.components.component import Component
 from pykn_nov_jam.components.key_input_component import InputComponent
 from pykn_nov_jam.entities.entity import Entity
+from pykn_nov_jam.systems.collision_system import CollisionSystem
 
 
 class MovementComponent(Component):
@@ -47,23 +47,20 @@ class MovementComponent(Component):
                 predicted_position,
             )
             if will_collide:
-                print(
-                    f"----\nPREDICT - Velocity before: {self.velocity}, Normal: {normal}"
-                )
+                # print(
+                #     f"----\nPREDICT - Velocity before: {self.velocity}, Normal: {normal}"
+                # )
                 velocty_along_normal = math.dot(self.velocity, normal)
                 if velocty_along_normal < 0:
                     self.velocity -= normal * velocty_along_normal
 
-                print(f"PREDICT - Velocity after: {self.velocity}\n----")
+                # print(f"PREDICT - Velocity after: {self.velocity}\n----")
 
         self.entity.position += self.velocity * delta_time
 
     def move(self, delta_time: float) -> None:
         if self.input_component is None:
             print("No InputComponent found in MovementComponent")
-            input_component: InputComponent | None = self.entity.get_component(
-                InputComponent
-            )  # pyright: ignore[reportAssignmentType]
             return
 
         self.velocity -= self.velocity * self.decel * delta_time

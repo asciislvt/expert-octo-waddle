@@ -20,12 +20,18 @@ def _player_on_collide(player: Entity, other_entity: Entity) -> None:
 
 class EntityPrefabs:
     @staticmethod
-    def create_player(position: kn.Vec2, global_singleton: globals.Globals) -> Entity:
+    def create_player(
+        position: kn.Vec2,
+        global_singleton: globals.Globals,
+        accel: float = 100,
+        decel: float = 15,
+        max_speed: float = 100,
+    ) -> Entity:
         player: Entity = Entity(position)
 
         player.add_component(InputComponent(player))
         player.add_component(SpriteComponent(player, "assets/sprites/player.png"))
-        player.add_component(MovementComponent(player, 160, 12, 100))
+        player.add_component(MovementComponent(player, accel, decel, max_speed))
         player.add_component(
             CollisionComponent(
                 player,

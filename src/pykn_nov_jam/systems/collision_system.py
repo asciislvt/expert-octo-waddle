@@ -1,16 +1,18 @@
 import pykraken as kn
-from pykn_nov_jam.components.collision_component import CollisionComponent
 
-from pykn_nov_jam.entities.entity_manager import EntityManager
+from pykn_nov_jam.components.collision_component import CollisionComponent
 from pykn_nov_jam.entities.entity import Entity
+from pykn_nov_jam.entities.entity_manager import EntityManager
 from pykn_nov_jam.spatial_hash import SpatialHash
 
 
 class CollisionSystem:
     _instance: "CollisionSystem | None" = None
+    prediction_steps: int = 3
 
-    def __init__(self):
+    def __init__(self, prediction_steps: int = 3):
         CollisionSystem._instance = self
+        CollisionSystem.prediction_steps = prediction_steps
         print("CollisionSystem initialized")
         pass
 
@@ -60,6 +62,9 @@ class CollisionSystem:
             return (False, kn.Vec2(0, 0))
 
         neighbors = SpatialHash._instance.get_neighbor_entities(entity)
+        if len(neighbors) == 0:
+            return (False, kn.Vec2(0, 0))
+
         for neighbor in neighbors:
             neighbor_collision: CollisionComponent = neighbor.get_component(  # type: ignore
                 CollisionComponent

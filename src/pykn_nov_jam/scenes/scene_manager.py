@@ -1,19 +1,20 @@
+import os.path as path
 from pykn_nov_jam.scenes.scene import Scene
 
 
 class SceneManager:
-    def __init__(self) -> None:
+    _instance: "SceneManager | None" = None
+
+    def __init__(self, world_path: str) -> None:
+        SceneManager._instance = self
         self.scenes: dict[str, "Scene"] = {}
+        self.world_path: str = world_path
         self.current_scene: Scene | None = None
 
-    def add_scene(self, name, scene):
-        self.scenes[name] = scene
-
-    def set_scene(self, name):
-        if name in self.scenes:
-            self.current_scene = self.scenes[name]
+    def get_levels(self, world_path: str) -> list[str]:
+        if path.exists("world_path"):
+            print("World path exists, getting levels...")
         else:
-            raise ValueError(f"Scene '{name}' does not exist.")
+            print("World path does not exist.")
 
-    def get_current_scene(self):
-        return self.current_scene
+        return []

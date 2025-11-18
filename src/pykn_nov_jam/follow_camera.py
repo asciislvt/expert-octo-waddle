@@ -28,7 +28,7 @@ class FollowCamera(kn.Camera):
                 self.pos = self.target_entity.position - kn.window.get_size() / 2
         else:
             self.pos = kn.Vec2(0, 0)
-            print("FollowCamera: No target entity to follow!")
+            # print("FollowCamera: No target entity to follow!")
 
 
 class FollowCameraUniformBuffer(kn.ShaderUniform):

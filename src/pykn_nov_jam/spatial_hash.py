@@ -1,5 +1,7 @@
-import pykraken as kn
 import math
+
+import pykraken as kn
+
 from pykn_nov_jam.components.collision_component import CollisionComponent
 from pykn_nov_jam.entities.entity import Entity
 
