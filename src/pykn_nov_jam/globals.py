@@ -4,6 +4,7 @@ from pykn_nov_jam.entities.entity import Entity
 class Globals:
     _instance: "Globals | None" = None
     player_entity: Entity | None = None
+    player_is_whistling: bool = False
 
     def __init__(self) -> None:
         if Globals._instance is not None:

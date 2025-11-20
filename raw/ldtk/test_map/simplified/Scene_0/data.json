@@ -22,10 +22,10 @@
 		"Player": [
 			{
 				"id": "Player",
-				"iid": "01712280-ac70-11f0-a730-d3cfda5e6ec5",
+				"iid": "6d0dcd80-ac70-11f0-b702-bdfb0fce5808",
 				"layer": "Entities",
-				"x": 80,
-				"y": 48,
+				"x": 164,
+				"y": 148,
 				"width": 8,
 				"height": 8,
 				"color": 3129022,
@@ -33,6 +33,68 @@
 					"accel": 100,
 					"decel": 15,
 					"max_speed": 100
+				}
+			}
+		],
+		"Sheep": [
+			{
+				"id": "Sheep",
+				"iid": "608b93b0-ac70-11f0-b702-97614181128b",
+				"layer": "Entities",
+				"x": 220,
+				"y": 68,
+				"width": 8,
+				"height": 8,
+				"color": 12463996,
+				"customFields": {
+					"accel": 80,
+					"decel": 20,
+					"max_speed": 80
+				}
+			},
+			{
+				"id": "Sheep",
+				"iid": "613ede20-ac70-11f0-b702-89186f6c4e0e",
+				"layer": "Entities",
+				"x": 44,
+				"y": 132,
+				"width": 8,
+				"height": 8,
+				"color": 12463996,
+				"customFields": {
+					"accel": 80,
+					"decel": 20,
+					"max_speed": 80
+				}
+			},
+			{
+				"id": "Sheep",
+				"iid": "62c90090-ac70-11f0-b702-3d8f85454f8b",
+				"layer": "Entities",
+				"x": 60,
+				"y": 60,
+				"width": 8,
+				"height": 8,
+				"color": 12463996,
+				"customFields": {
+					"accel": 80,
+					"decel": 20,
+					"max_speed": 80
+				}
+			},
+			{
+				"id": "Sheep",
+				"iid": "63c9cec0-ac70-11f0-b702-b51231f6c2a0",
+				"layer": "Entities",
+				"x": 116,
+				"y": 36,
+				"width": 8,
+				"height": 8,
+				"color": 12463996,
+				"customFields": {
+					"accel": 80,
+					"decel": 20,
+					"max_speed": 80
 				}
 			}
 		]

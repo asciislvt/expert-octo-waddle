@@ -40,21 +40,20 @@ class MovementComponent(Component):
 
         self.move(delta_time)
 
-        if CollisionSystem._instance is not None:
-            predicted_position = self.entity.position + self.velocity * delta_time
-            will_collide, normal = CollisionSystem._instance.predict_collision(
-                self.entity,
-                predicted_position,
-            )
-            if will_collide:
-                # print(
-                #     f"----\nPREDICT - Velocity before: {self.velocity}, Normal: {normal}"
-                # )
-                velocty_along_normal = math.dot(self.velocity, normal)
-                if velocty_along_normal < 0:
-                    self.velocity -= normal * velocty_along_normal
+        predicted_position = self.entity.position + self.velocity * delta_time
+        will_collide, normal = CollisionSystem._instance.predict_collision(
+            self.entity,
+            predicted_position,
+        )
+        if will_collide:
+            # print(
+            #     f"----\nPREDICT - Velocity before: {self.velocity}, Normal: {normal}"
+            # )
+            velocty_along_normal = math.dot(self.velocity, normal)
+            if velocty_along_normal < 0:
+                self.velocity -= normal * velocty_along_normal
 
-                # print(f"PREDICT - Velocity after: {self.velocity}\n----")
+            # print(f"PREDICT - Velocity after: {self.velocity}\n----")
 
         self.entity.position += self.velocity * delta_time
 

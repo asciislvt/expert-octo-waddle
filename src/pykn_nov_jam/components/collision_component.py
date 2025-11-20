@@ -32,6 +32,9 @@ class CollisionComponent(Component):
         if self.enabled is False:
             return
 
+        if self.body_type == "static":
+            return
+
         self.collider.x = self.entity.position.x - (self.collider.w / 2)
         self.collider.y = self.entity.position.y - (self.collider.h / 2)
 

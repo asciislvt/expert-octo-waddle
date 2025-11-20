@@ -7,31 +7,38 @@ from pykn_nov_jam.spatial_hash import SpatialHash
 
 
 class CollisionSystem:
-    _instance: "CollisionSystem | None" = None
+    # _instance: "CollisionSystem | None" = None
     prediction_steps: int = 3
 
     def __init__(
-        self, prediction_steps: int = 3, entity_manager: EntityManager | None = None
+        self,
+        prediction_steps: int = 3,
+        entity_manager: EntityManager | None = None,
+        spatial_hash: SpatialHash | None = None,
     ) -> None:
         CollisionSystem._instance = self
-        entity_manager = entity_manager
+        self.entity_manager = entity_manager
+        self.spatial_hash = spatial_hash
         CollisionSystem.prediction_steps = prediction_steps
+        if self.entity_manager is None:
+            print("CollisionSystem: EntityManager not provided.")
+        if self.spatial_hash is None:
+            print("CollisionSystem: SpatialHash not provided.")
         print("CollisionSystem initialized")
-        pass
 
     def process_components(self, delta_time: float) -> None:
-        if EntityManager._instance is None or SpatialHash._instance is None:
+        if self.entity_manager is None or self.spatial_hash is None:
             print("CollisionSystem: EntityManager or SpatialHash not initialized.")
             return
-        SpatialHash._instance.clear()
-        entity_list = EntityManager._instance.get_entities_with_component(
+        self.spatial_hash.clear()
+        entity_list = self.entity_manager.get_entities_with_component(
             CollisionComponent
         )
 
         for entity in entity_list:
-            SpatialHash._instance.insert(entity)
+            self.spatial_hash.insert(entity)
 
-        cells = SpatialHash._instance.get_cells()
+        cells = self.spatial_hash.get_cells()
         for cell_position in cells.keys():
             cell_list = cells[cell_position]
             if len(cell_list) < 2:
@@ -60,11 +67,11 @@ class CollisionSystem:
     def predict_collision(
         self, entity: Entity, target_position: kn.Vec2
     ) -> tuple[bool, kn.Vec2]:
-        if SpatialHash._instance is None:
+        if self.spatial_hash is None:
             print("CollisionSystem: SpatialHash not initialized.")
             return (False, kn.Vec2(0, 0))
 
-        neighbors = SpatialHash._instance.get_neighbor_entities(entity)
+        neighbors = self.spatial_hash.get_neighbor_entities(entity)
         if len(neighbors) == 0:
             return (False, kn.Vec2(0, 0))
 

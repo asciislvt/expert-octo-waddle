@@ -1,11 +1,13 @@
 import pykraken as kn
 
 from pykn_nov_jam import globals
+from pykn_nov_jam.components.ai.ai_brain_component import AiBrainComponent
 from pykn_nov_jam.components.ai.ai_steering_component import AiSteeringComponent
 from pykn_nov_jam.components.collision_component import CollisionComponent
 from pykn_nov_jam.components.key_input_component import InputComponent
 from pykn_nov_jam.components.movement_component import MovementComponent
 from pykn_nov_jam.components.sprite_component import SpriteComponent
+from pykn_nov_jam.components.whistle_component import WhistleComponent
 from pykn_nov_jam.entities.entity import Entity
 
 
@@ -32,6 +34,7 @@ class EntityPrefabs:
         player.add_component(InputComponent(player))
         player.add_component(SpriteComponent(player, "assets/sprites/player.png"))
         player.add_component(MovementComponent(player, accel, decel, max_speed))
+        player.add_component(WhistleComponent(player))
         player.add_component(
             CollisionComponent(
                 player,
@@ -42,7 +45,7 @@ class EntityPrefabs:
         )
         global_singleton.set_player_entity(player)
 
-        print("Player entity created at position: %r" % position)
+        # print("Player entity created at position: %r" % position)
         return player
 
     @staticmethod
@@ -51,12 +54,13 @@ class EntityPrefabs:
     ) -> Entity:
         sheep: Entity = Entity(position)
 
-        sheep.add_component(AiSteeringComponent(sheep, target_entity, fleeing))
-        sheep.add_component(SpriteComponent(sheep, "assets/sprites/sheep.png"))
-        sheep.add_component(MovementComponent(sheep, 70, 10, 30))
+        sheep.add_component(AiSteeringComponent(sheep))
+        sheep.add_component(AiBrainComponent(sheep))
+        sheep.add_component(MovementComponent(sheep, 60, 10, 20))
         sheep.add_component(CollisionComponent(sheep, kn.Rect(sheep.position, 16, 16)))
+        sheep.add_component(SpriteComponent(sheep, "assets/sprites/sheep.png"))
 
-        print("Sheep entity created at position: %r" % position)
+        # print("Sheep entity created at position: %r" % position)
         return sheep
 
     @staticmethod
@@ -72,7 +76,7 @@ class EntityPrefabs:
             )
         )
 
-        print("Static object entity created at position: %r" % position)
+        # print("Static object entity created at position: %r" % position)
         return static_object
 
     @staticmethod
@@ -88,5 +92,5 @@ class EntityPrefabs:
             )
         )
 
-        print("Collision block entity created at position: %r" % position)
+        # print("Collision block entity created at position: %r" % position)
         return collision_block
