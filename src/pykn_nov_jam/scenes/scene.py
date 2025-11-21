@@ -5,6 +5,7 @@ from pykn_nov_jam.globals import Globals
 from pykn_nov_jam.follow_camera import FollowCamera
 from pykn_nov_jam.scenes.level_data import LevelData
 from pykn_nov_jam.spatial_hash import SpatialHash
+from pykn_nov_jam.systems.ai_system import AiSystem
 from pykn_nov_jam.systems.collision_system import CollisionSystem
 
 
@@ -15,6 +16,7 @@ class Scene:
         self.collision_system: CollisionSystem = CollisionSystem(
             3, self.entity_manager, self.spatial_hash
         )
+        self.ai_system = AiSystem(self.entity_manager)
         self.visual_layers: dict[int, kn.Texture] = level_data.sprite_layers
 
         for entity in level_data.entities:
@@ -29,13 +31,14 @@ class Scene:
 
     def process_scene(self, delta_time: float) -> None:
         kn.renderer.clear(kn.color.BLACK)
+
+        self.ai_system.process_ai(delta_time)
         for entity in self.entity_manager.get_entities():
             for component in entity.component_collection.values():
                 component.process_input()
                 component.process_update(kn.time.get_delta())
 
-        self.collision_system.process_components(delta_time)
-        # self.spatial_hash.debug_draw_cells()
+        self.collision_system.process_collisions(delta_time)
 
         self.main_camera.update(kn.time.get_delta())
         self.scale_shader.set_uniform(0, self.main_camera.uniform_buffer.to_bytes())
@@ -55,3 +58,6 @@ class Scene:
 
     def get_collision_system(self) -> CollisionSystem:
         return self.collision_system
+
+    def get_entity_manager(self) -> EntityManager:
+        return self.entity_manager

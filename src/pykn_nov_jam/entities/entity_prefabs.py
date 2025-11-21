@@ -57,7 +57,7 @@ class EntityPrefabs:
         sheep.add_component(AiSteeringComponent(sheep))
         sheep.add_component(AiBrainComponent(sheep))
         sheep.add_component(MovementComponent(sheep, 60, 10, 20))
-        sheep.add_component(CollisionComponent(sheep, kn.Rect(sheep.position, 16, 16)))
+        sheep.add_component(CollisionComponent(sheep, kn.Rect(sheep.position, 14, 14)))
         sheep.add_component(SpriteComponent(sheep, "assets/sprites/sheep.png"))
 
         # print("Sheep entity created at position: %r" % position)

@@ -3,6 +3,7 @@ from pykn_nov_jam.entities.entity import Entity
 
 class Globals:
     _instance: "Globals | None" = None
+    fear_level: float = 0.0
     player_entity: Entity | None = None
     player_is_whistling: bool = False
 

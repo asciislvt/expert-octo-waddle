@@ -6,13 +6,15 @@ from pykn_nov_jam.globals import Globals
 class WhistleComponent(Component):
     def __init__(self, entity) -> None:
         super().__init__(entity)
+        self.is_whistling: bool = False
 
     def process_input(self) -> None:
         if Globals._instance is None:
             return
 
-        if kn.key.is_pressed(kn.K_LSHIFT):
-            Globals._instance.player_is_whistling = True
+        if kn.key.is_just_pressed(kn.K_LSHIFT):
+            self.is_whistling = True
             print("Player is whistling")
-        else:
-            Globals._instance.player_is_whistling = False
+        if kn.key.is_just_released(kn.K_LSHIFT):
+            self.is_whistling = False
+            print("Player stopped whistling")

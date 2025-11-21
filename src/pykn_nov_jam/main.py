@@ -13,7 +13,6 @@ scene_manager.current_scene = scene_manager.load_scene("Scene_0")
 
 while kn.window.is_open():
     kn.event.poll()
-
     scene_manager.current_scene.process_scene(kn.time.get_delta())
 
 kn.quit()

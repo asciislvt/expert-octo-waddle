@@ -6,7 +6,6 @@ import pykraken as kn
 from pykn_nov_jam.components.key_input_component import InputComponent
 from pykn_nov_jam.components.movement_component import MovementComponent
 from pykn_nov_jam.entities.entity import Entity
-from pykn_nov_jam.globals import Globals
 
 
 class AiSteeringComponent(InputComponent):
@@ -18,18 +17,6 @@ class AiSteeringComponent(InputComponent):
         super().__init__(entity)
         self.fleeing: bool = fleeing
         self.wander_angle: float = 0.0
-        # self.motion_component: MovementComponent = self.entity.get_component(  # type: ignore
-        #     MovementComponent
-        # )
-        self.target_position: kn.Vec2 = kn.Vec2(0, 0)
-
-    def set_target_position(self, target_pos: kn.Vec2) -> None:
-        self.target_position = target_pos
-
-    def process_input(self) -> None:
-        pass
-        # steering = self.seek(self.target_position)
-        # self.input_direction = steering
 
     def process_draw(self) -> None:
         debug_input_line = kn.Line(
@@ -47,7 +34,7 @@ class AiSteeringComponent(InputComponent):
         if flee:
             dir_to_target = self.entity.position - target_pos
         else:
-            dir_to_target = self.target_position - target_pos
+            dir_to_target = target_pos - self.entity.position
         dir_to_target.normalize()
 
         wish_velocity = dir_to_target * movement_component.max_speed
@@ -62,8 +49,6 @@ class AiSteeringComponent(InputComponent):
         )  # type: ignore
         steering = kn.Vec2(0, 0)
         self.wander_angle += random.uniform(-0.2, 0.2)
-        # self.wander_angle = self.wander_angle % (2 * math.pi)
-        # print(self.wander_angle)
 
         wander_circle = self.entity.position + movement_component.velocity
         wander_point = kn.Vec2(

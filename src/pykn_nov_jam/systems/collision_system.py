@@ -26,7 +26,7 @@ class CollisionSystem:
             print("CollisionSystem: SpatialHash not provided.")
         print("CollisionSystem initialized")
 
-    def process_components(self, delta_time: float) -> None:
+    def process_collisions(self, delta_time: float) -> None:
         if self.entity_manager is None or self.spatial_hash is None:
             print("CollisionSystem: EntityManager or SpatialHash not initialized.")
             return
