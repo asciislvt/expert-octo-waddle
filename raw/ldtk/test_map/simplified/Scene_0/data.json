@@ -46,11 +46,7 @@
 				"width": 8,
 				"height": 8,
 				"color": 12463996,
-				"customFields": {
-					"accel": 80,
-					"decel": 20,
-					"max_speed": 80
-				}
+				"customFields" : {}
 			},
 			{
 				"id": "Sheep",
@@ -61,11 +57,7 @@
 				"width": 8,
 				"height": 8,
 				"color": 12463996,
-				"customFields": {
-					"accel": 80,
-					"decel": 20,
-					"max_speed": 80
-				}
+				"customFields" : {}
 			},
 			{
 				"id": "Sheep",
@@ -76,11 +68,7 @@
 				"width": 8,
 				"height": 8,
 				"color": 12463996,
-				"customFields": {
-					"accel": 80,
-					"decel": 20,
-					"max_speed": 80
-				}
+				"customFields" : {}
 			},
 			{
 				"id": "Sheep",
@@ -91,11 +79,42 @@
 				"width": 8,
 				"height": 8,
 				"color": 12463996,
-				"customFields": {
-					"accel": 80,
-					"decel": 20,
-					"max_speed": 80
-				}
+				"customFields" : {}
+			}
+		],
+		"Container": [
+			{
+				"id": "Container",
+				"iid": "b54ccf90-ac70-11f0-bca0-f1ce5b939900",
+				"layer": "Entities",
+				"x": 60,
+				"y": 36,
+				"width": 8,
+				"height": 8,
+				"color": 12470831,
+				"customFields" : {}
+			},
+			{
+				"id": "Container",
+				"iid": "b615ebf0-ac70-11f0-bca0-af34daaa18c9",
+				"layer": "Entities",
+				"x": 92,
+				"y": 36,
+				"width": 8,
+				"height": 8,
+				"color": 12470831,
+				"customFields" : {}
+			},
+			{
+				"id": "Container",
+				"iid": "b8cea350-ac70-11f0-bca0-e1d1f90e9b75",
+				"layer": "Entities",
+				"x": 180,
+				"y": 140,
+				"width": 8,
+				"height": 8,
+				"color": 12470831,
+				"customFields" : {}
 			}
 		]
 	}

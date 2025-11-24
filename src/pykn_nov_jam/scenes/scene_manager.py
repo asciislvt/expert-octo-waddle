@@ -6,9 +6,7 @@ import json
 import pykraken as kn
 
 from pykn_nov_jam.entities.entity import Entity
-from pykn_nov_jam.entities.entity_manager import EntityManager
 from pykn_nov_jam.entities.entity_prefabs import EntityPrefabs
-from pykn_nov_jam.globals import Globals
 from pykn_nov_jam.scenes.scene import Scene
 from pykn_nov_jam.scenes.level_data import LevelData
 
@@ -73,44 +71,23 @@ class LevelLoader:
             entity_list: dict = data["entities"]
 
         for entity_type, entity_instances in entity_list.items():
-            for i, entity_data in enumerate(entity_instances):
-                print("Entity index:", i)
-                entity_id = entity_data["id"]
-                pos_x = entity_data["x"] * 2
-                pos_y = entity_data["y"] * 2
-                sprite_width = entity_data["width"]
-                sprite_height = entity_data["height"]
-                if entity_id == "Player":
-                    accel = entity_data["customFields"]["accel"]
-                    decel = entity_data["customFields"]["decel"]
-                    max_speed = entity_data["customFields"]["max_speed"]
-                    position = kn.Vec2(pos_x, pos_y)
-                    print(
-                        f"Entity parameters:\n Position: {position}\n Accel: {accel}\n Decel: {decel}\n Max Speed: {max_speed}\n Sprite Width: {sprite_width}\n Sprite Height: {sprite_height}"
-                    )
-                    global_singleton = Globals._instance
-                    if global_singleton is None:
-                        raise Exception(
-                            "Globals singleton instance is not initialized."
-                        )
-                    entity_instance = EntityPrefabs.create_player(
-                        position, global_singleton, accel, decel, max_speed
-                    )
-                    entities.append(entity_instance)
-                elif entity_id == "Sheep":
-                    position = kn.Vec2(pos_x, pos_y)
-                    entity_instance = EntityPrefabs.create_sheep(position, None, False)
-                    entities.append(entity_instance)
+            print(
+                f"Creating entity type: {entity_type} | Instances: {len(entity_instances)}"
+            )
+            for entity_data in entity_instances:
+                # print("Entity data:", entity_data)
+                entity_instance = EntityPrefabs.create_entity_from_data(entity_data)
+                entities.append(entity_instance)
 
-            print("--- BACKGROUND LAYERS:")
-            background_layers = data["layers"]
-            for layer in background_layers:
-                layer_index = background_layers.index(layer)
-                layer_path = path.join(scene_path, layer)
-                texture = kn.Texture(layer_path)
-                sprite_layers[layer_index] = texture
-                print(f"Loaded sprite layer {layer_index} from path: {layer_path}")
-            print("---")
+        print("--- BACKGROUND LAYERS:")
+        background_layers = data["layers"]
+        for layer in background_layers:
+            layer_index = background_layers.index(layer)
+            layer_path = path.join(scene_path, layer)
+            texture = kn.Texture(layer_path)
+            sprite_layers[layer_index] = texture
+            print(f"Loaded sprite layer {layer_index} from path: {layer_path}")
+        print("---")
 
         # generate collision blocks from collision map
         collision_map_path = path.join(scene_path, "Collision.csv")

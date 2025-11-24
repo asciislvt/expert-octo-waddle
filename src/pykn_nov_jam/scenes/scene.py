@@ -7,6 +7,7 @@ from pykn_nov_jam.scenes.level_data import LevelData
 from pykn_nov_jam.spatial_hash import SpatialHash
 from pykn_nov_jam.systems.ai_system import AiSystem
 from pykn_nov_jam.systems.collision_system import CollisionSystem
+from pykn_nov_jam.systems.interaction_system import InteractionSystem
 
 
 class Scene:
@@ -15,6 +16,9 @@ class Scene:
         self.spatial_hash: SpatialHash = SpatialHash()
         self.collision_system: CollisionSystem = CollisionSystem(
             3, self.entity_manager, self.spatial_hash
+        )
+        self.interaction_system: InteractionSystem = InteractionSystem(
+            self.entity_manager, self.spatial_hash
         )
         self.ai_system = AiSystem(self.entity_manager)
         self.visual_layers: dict[int, kn.Texture] = level_data.sprite_layers
@@ -39,6 +43,7 @@ class Scene:
                 component.process_update(kn.time.get_delta())
 
         self.collision_system.process_collisions(delta_time)
+        self.interaction_system.process_interactions()
 
         self.main_camera.update(kn.time.get_delta())
         self.scale_shader.set_uniform(0, self.main_camera.uniform_buffer.to_bytes())
