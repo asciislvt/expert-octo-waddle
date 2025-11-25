@@ -59,6 +59,10 @@ class CollisionSystem:
                         CollisionComponent
                     )  # type: ignore
 
+                    if collision_a.enabled is False or collision_b.enabled is False:
+                        # print("CollisionComponent disabled, skipping collision check.")
+                        continue
+
                     if self.is_colliding(
                         collision_a.get_collider(), collision_b.get_collider()
                     ):
@@ -82,6 +86,9 @@ class CollisionSystem:
             collision_component: CollisionComponent = entity.get_component(  # type: ignore
                 CollisionComponent
             )
+
+            if neighbor_collision.enabled is False:
+                continue
 
             neighbor_collider: kn.Rect = neighbor_collision.get_collider()
             collider = collision_component.get_collider().copy()

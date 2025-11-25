@@ -16,6 +16,7 @@ class CollisionComponent(Component):
     ) -> None:
         super().__init__(entity)
         self.body_type: str = body_type
+        self.initial_body_type: str = body_type
         if collider is None:
             self.collider: kn.Rect = kn.Rect()
         else:
@@ -42,4 +43,4 @@ class CollisionComponent(Component):
     #     if self.enabled is False:
     #         return
     #
-    #     kn.draw.rect(self.collider, kn.color.RED)
+    #     kn.draw.rect(self.collider, kn.Color(255, 100, 0, 50))

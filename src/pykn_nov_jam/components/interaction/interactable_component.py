@@ -11,3 +11,6 @@ class InteractableComponent(Component):
         self.on_interact: Callable[..., None] = (
             on_interact if on_interact else lambda e: None
         )
+
+    def interact(self) -> None:
+        self.on_interact(self.entity)

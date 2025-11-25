@@ -29,6 +29,18 @@ class SpatialHash:
     def get_cells(self) -> dict[kn.Vec2, list[Entity]]:
         return self.cells
 
+    def get_neighbor_entites_with_component(
+        self, entity: Entity, component_type: type
+    ) -> list[Entity]:
+        result: list[Entity] = []
+        neighbor_entities = self.get_neighbor_entities(entity)
+
+        for entity in neighbor_entities:
+            if entity.has_component(component_type):
+                result.append(entity)
+
+        return result
+
     def get_neighbor_entities(self, entity: Entity) -> list[Entity]:
         result: list[Entity] = []
         neighbor_cells = []

@@ -8,7 +8,7 @@ kn.window.create("The Herdsman", kn.Vec2(480, 432))
 kn.time.set_target(60)
 
 global_singleton = Globals()
-scene_manager = SceneManager("raw/ldtk/test_map")
+scene_manager = SceneManager("raw/ldtk/herdsman")
 scene_manager.current_scene = scene_manager.load_scene("Scene_0")
 
 while kn.window.is_open():

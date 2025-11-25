@@ -1,6 +1,9 @@
 import pykraken as kn
 
 from typing import Callable
+from pykn_nov_jam.components.interaction.interactable_component import (
+    InteractableComponent,
+)
 from pykn_nov_jam.components.interaction.interaction_component import (
     InteractionComponent,
 )
@@ -49,7 +52,6 @@ class EntityPrefabs:
                 player,
                 kn.Rect(position, 14, 14),
                 "dynamic",
-                # on_collide=_player_on_collide,
             )
         )
         if Globals._instance is None:
@@ -77,14 +79,40 @@ class EntityPrefabs:
     def create_container(position: kn.Vec2, custom_params: dict = {}) -> Entity:
         container: Entity = Entity(position)
 
+        def on_interact(entity: Entity) -> None:
+            print("Interacted with container at position: %r" % entity.position)
+
         container.add_component(
             SpriteComponent(container, "assets/sprites/container-chest.png")
         )
         container.add_component(
             CollisionComponent(container, kn.Rect(container.position, 16, 16))
         )
+        container.add_component(InteractableComponent(container, on_interact))
 
         return container
+
+    @staticmethod
+    def create_door(position: kn.Vec2, custom_params: dict = {}) -> Entity:
+        door: Entity = Entity(position)
+
+        def on_interact(entity: Entity) -> None:
+            print("Interacted with door at position: %r" % entity.position)
+            collision: CollisionComponent = entity.get_component(CollisionComponent)  # type: ignore
+            if collision:
+                collision.enabled = not collision.enabled
+                print(f"Collision enabled: {collision.enabled}")
+
+        # TODO: Add door sprites and animation
+        # door.add_component(
+        #     SpriteComponent(door, "assets/sprites/door-closed.png", 16, 16)
+        # )
+        door.add_component(
+            CollisionComponent(door, kn.Rect(door.position, 16, 16), "static")
+        )
+        door.add_component(InteractableComponent(door, on_interact))
+
+        return door
 
     @staticmethod
     def create_static_object(
@@ -123,13 +151,5 @@ class EntityPrefabs:
         "Player": create_player,
         "Sheep": create_sheep,
         "Container": create_container,
+        "Door": create_door,
     }
-
-
-# def _player_on_collide(player: Entity, other_entity: Entity) -> None:
-#     if other_entity.has_component(CollisionComponent):
-#         other_collision: CollisionComponent = other_entity.get_component(
-#             CollisionComponent
-#         )  # type: ignore
-#         if other_collision.body_type == "static":
-#             movement: MovementComponent = player.get_component(MovementComponent)  # type: ignore

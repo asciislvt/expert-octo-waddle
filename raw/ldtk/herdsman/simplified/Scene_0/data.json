@@ -116,6 +116,41 @@
 				"color": 12470831,
 				"customFields" : {}
 			}
+		],
+		"Door": [
+			{
+				"id": "Door",
+				"iid": "fe1a7820-ac70-11f0-8eea-f912e2a49a41",
+				"layer": "Entities",
+				"x": 104,
+				"y": 88,
+				"width": 8,
+				"height": 8,
+				"color": 12470831,
+				"customFields" : {}
+			},
+			{
+				"id": "Door",
+				"iid": "c219ae70-ac70-11f0-8eea-9becb490533e",
+				"layer": "Entities",
+				"x": 160,
+				"y": 160,
+				"width": 8,
+				"height": 8,
+				"color": 12470831,
+				"customFields" : {}
+			},
+			{
+				"id": "Door",
+				"iid": "afd9a580-ac70-11f0-8eea-9f4025dab52c",
+				"layer": "Entities",
+				"x": 72,
+				"y": 24,
+				"width": 8,
+				"height": 8,
+				"color": 12470831,
+				"customFields" : {}
+			}
 		]
 	}
 }
