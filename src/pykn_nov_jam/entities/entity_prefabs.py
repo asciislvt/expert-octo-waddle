@@ -8,6 +8,7 @@ from pykn_nov_jam.components.interaction.interaction_component import (
     InteractionComponent,
 )
 from pykn_nov_jam.globals import Globals
+from pykn_nov_jam.components.label_component import LabelComponent
 from pykn_nov_jam.components.ai.ai_brain_component import AiBrainComponent
 from pykn_nov_jam.components.ai.ai_steering_component import AiSteeringComponent
 from pykn_nov_jam.components.collision_component import CollisionComponent
@@ -89,6 +90,11 @@ class EntityPrefabs:
             CollisionComponent(container, kn.Rect(container.position, 16, 16))
         )
         container.add_component(InteractableComponent(container, on_interact))
+        container.add_component(
+            LabelComponent(
+                container, "Container\n (F) - Use", kn.color.WHITE, kn.Vec2(8, -24)
+            )
+        )
 
         return container
 
@@ -111,6 +117,9 @@ class EntityPrefabs:
             CollisionComponent(door, kn.Rect(door.position, 16, 16), "static")
         )
         door.add_component(InteractableComponent(door, on_interact))
+        door.add_component(
+            LabelComponent(door, "Door\n (F) - Use", kn.color.WHITE, kn.Vec2(22, -16))
+        )
 
         return door
 

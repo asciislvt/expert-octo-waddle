@@ -45,8 +45,8 @@ class Scene:
         self.collision_system.process_collisions(delta_time)
         self.interaction_system.process_interactions()
 
-        self.main_camera.update(kn.time.get_delta())
         self.scale_shader.set_uniform(0, self.main_camera.uniform_buffer.to_bytes())
+        self.main_camera.update(kn.time.get_delta())
 
         for layer in self.visual_layers.keys():
             background: kn.Texture = self.visual_layers[layer]

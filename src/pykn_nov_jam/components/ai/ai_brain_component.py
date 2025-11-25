@@ -1,5 +1,6 @@
-# import pykraken as kn
+import pykraken as kn
 
+import random
 from pykn_nov_jam.components.ai.ai_input_data import AiInputData
 from pykn_nov_jam.components.ai.ai_steering_component import AiSteeringComponent
 from pykn_nov_jam.components.component import Component

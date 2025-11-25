@@ -5,7 +5,7 @@
 	"y": 0,
 	"width": 256,
 	"height": 256,
-	"bgColor": "#000000",
+	"bgColor": "#2F2F2F",
 	"neighbourLevels": [
 		{
 			"levelIid": "e08c5ec0-ac70-11f0-9083-11da53dfe6a8",

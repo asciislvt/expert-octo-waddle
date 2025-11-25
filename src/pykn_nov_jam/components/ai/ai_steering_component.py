@@ -18,12 +18,12 @@ class AiSteeringComponent(InputComponent):
         self.fleeing: bool = fleeing
         self.wander_angle: float = 0.0
 
-    def process_draw(self) -> None:
-        debug_input_line = kn.Line(
-            self.entity.position, self.input_direction * 32 + self.entity.position
-        )
-        debug_input_line_color = kn.color.GREEN
-        kn.draw.line(debug_input_line, debug_input_line_color, 2)
+    # def process_draw(self) -> None:
+    #     debug_input_line = kn.Line(
+    #         self.entity.position, self.input_direction * 32 + self.entity.position
+    #     )
+    #     debug_input_line_color = kn.color.GREEN
+    #     kn.draw.line(debug_input_line, debug_input_line_color, 2)
 
     def seek(self, target_pos: kn.Vec2, flee: bool = False) -> kn.Vec2:
         movement_component: MovementComponent = self.entity.get_component(
