@@ -1,10 +1,10 @@
 import pykraken as kn
 
-from pykn_nov_jam.components.component import Component
+from pykn_nov_jam.components.input_component import InputComponent
 from pykn_nov_jam.entities.entity import Entity
 
 
-class InputComponent(Component):
+class KeyInputComponent(InputComponent):
     def __init__(self, entity: Entity) -> None:
         super().__init__(entity)
         self.input_direction: kn.Vec2 = kn.Vec2(0, 0)

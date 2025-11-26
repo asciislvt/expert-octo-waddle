@@ -3,7 +3,7 @@ import random
 
 import pykraken as kn
 
-from pykn_nov_jam.components.key_input_component import InputComponent
+from pykn_nov_jam.components.input_component import InputComponent
 from pykn_nov_jam.components.movement_component import MovementComponent
 from pykn_nov_jam.entities.entity import Entity
 

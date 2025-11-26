@@ -10,9 +10,11 @@ from pykn_nov_jam.components.interaction.interaction_component import (
 from pykn_nov_jam.globals import Globals
 from pykn_nov_jam.components.label_component import LabelComponent
 from pykn_nov_jam.components.ai.ai_brain_component import AiBrainComponent
+from pykn_nov_jam.components.ai.behaviors.ai_follow_behavior import AiFollowBehavior
+from pykn_nov_jam.components.ai.behaviors.ai_wander_behavior import AiWanderBehavior
 from pykn_nov_jam.components.ai.ai_steering_component import AiSteeringComponent
 from pykn_nov_jam.components.collision_component import CollisionComponent
-from pykn_nov_jam.components.key_input_component import InputComponent
+from pykn_nov_jam.components.key_input_component import KeyInputComponent
 from pykn_nov_jam.components.movement_component import MovementComponent
 from pykn_nov_jam.components.sprite_component import SpriteComponent
 from pykn_nov_jam.components.whistle_component import WhistleComponent
@@ -43,7 +45,7 @@ class EntityPrefabs:
         max_speed: float = custom_params.get("max_speed", 40.0)
         player: Entity = Entity(position)
 
-        player.add_component(InputComponent(player))
+        player.add_component(KeyInputComponent(player))
         player.add_component(InteractionComponent(player))
         player.add_component(SpriteComponent(player, "assets/sprites/player.png"))
         player.add_component(MovementComponent(player, accel, decel, max_speed))
@@ -68,10 +70,14 @@ class EntityPrefabs:
         sheep: Entity = Entity(position)
 
         sheep.add_component(AiSteeringComponent(sheep))
-        sheep.add_component(AiBrainComponent(sheep))
         sheep.add_component(MovementComponent(sheep, 60, 10, 20))
         sheep.add_component(CollisionComponent(sheep, kn.Rect(sheep.position, 14, 14)))
         sheep.add_component(SpriteComponent(sheep, "assets/sprites/sheep.png"))
+
+        brain: AiBrainComponent = AiBrainComponent(sheep)
+        brain.add_behavior(AiFollowBehavior(sheep, 2))
+        brain.add_behavior(AiWanderBehavior(sheep, 1))
+        sheep.add_component(brain)
 
         # print("Sheep entity created at position: %r" % position)
         return sheep
@@ -92,7 +98,7 @@ class EntityPrefabs:
         container.add_component(InteractableComponent(container, on_interact))
         container.add_component(
             LabelComponent(
-                container, "Container\n (F) - Use", kn.color.WHITE, kn.Vec2(8, -24)
+                container, "Container\n (F) - Use", kn.color.WHITE, kn.Vec2(14, -24)
             )
         )
 

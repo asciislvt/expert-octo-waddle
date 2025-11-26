@@ -20,7 +20,7 @@ class Scene:
         self.interaction_system: InteractionSystem = InteractionSystem(
             self.entity_manager, self.spatial_hash
         )
-        self.ai_system = AiSystem(self.entity_manager)
+        self.ai_system = AiSystem(self.entity_manager, self.spatial_hash)
         self.visual_layers: dict[int, kn.Texture] = level_data.sprite_layers
 
         for entity in level_data.entities:

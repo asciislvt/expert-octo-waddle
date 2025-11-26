@@ -34,7 +34,9 @@ class InteractionSystem:
 
         nearest_entity = self.get_nearest_entity(self.player_entity, entities)  # type: ignore
         if nearest_entity is None:
-            if self.current_interactable is not None:
+            if self.current_interactable is None:
+                return
+            elif self.current_interactable is not None:
                 self.current_interactable.get_component(LabelComponent).visible = False  # type: ignore
                 self.current_interactable = None
             return
