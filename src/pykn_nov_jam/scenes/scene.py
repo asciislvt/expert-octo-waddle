@@ -28,7 +28,7 @@ class Scene:
         if Globals._instance is None:
             raise Exception("Globals singleton instance is not initialized.")
         self.main_camera = FollowCamera(
-            Globals._instance.get_player_entity(), kn.Vec2(0, 0), 2.0, 0.8
+            Globals._instance.get_player_entity(), kn.Vec2(0, 0), 2.0, 1.4
         )
         self.main_camera.set()
         self.scale_shader = kn.ShaderState("assets/shaders/scale.spv", 1)

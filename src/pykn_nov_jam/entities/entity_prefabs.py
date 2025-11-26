@@ -7,6 +7,7 @@ from pykn_nov_jam.components.interaction.interactable_component import (
 from pykn_nov_jam.components.interaction.interaction_component import (
     InteractionComponent,
 )
+from pykn_nov_jam.components.satiety_component import SatietyComponent
 from pykn_nov_jam.globals import Globals
 from pykn_nov_jam.components.label_component import LabelComponent
 from pykn_nov_jam.components.ai.ai_brain_component import AiBrainComponent
@@ -73,6 +74,7 @@ class EntityPrefabs:
         sheep.add_component(MovementComponent(sheep, 60, 10, 20))
         sheep.add_component(CollisionComponent(sheep, kn.Rect(sheep.position, 14, 14)))
         sheep.add_component(SpriteComponent(sheep, "assets/sprites/sheep.png"))
+        sheep.add_component(SatietyComponent(sheep, 100.0))
 
         brain: AiBrainComponent = AiBrainComponent(sheep)
         brain.add_behavior(AiFollowBehavior(sheep, 2))
@@ -111,14 +113,25 @@ class EntityPrefabs:
         def on_interact(entity: Entity) -> None:
             print("Interacted with door at position: %r" % entity.position)
             collision: CollisionComponent = entity.get_component(CollisionComponent)  # type: ignore
+            sprite: SpriteComponent = entity.get_component(SpriteComponent)  # type: ignore
             if collision:
                 collision.enabled = not collision.enabled
                 print(f"Collision enabled: {collision.enabled}")
+            if sprite:
+                if collision.enabled:
+                    sprite.offset_source_rect(0, 0)
+                else:
+                    sprite.offset_source_rect(8, 0)
 
         # TODO: Add door sprites and animation
         # door.add_component(
         #     SpriteComponent(door, "assets/sprites/door-closed.png", 16, 16)
         # )
+        door.add_component(
+            SpriteComponent(
+                door, "assets/sprites/door.png", 16, 16, 0, 0, kn.Rect(0, 0, 8, 8)
+            )
+        )
         door.add_component(
             CollisionComponent(door, kn.Rect(door.position, 16, 16), "static")
         )
