@@ -23,9 +23,10 @@ class SatietyComponent(Component):
         satiety_recovery = self.recovery_rate * delta_time
         self.satiety_drained = 0.0
         self.satiety = min(self.max_satiety, self.satiety + satiety_recovery)
+        print(f"Recovered satiety {satiety_recovery}")
 
     def is_hungry(self) -> bool:
-        if self.satiety < (self.max_satiety * 0.95):
+        if self.satiety < (self.max_satiety * 0.50):
             print(
                 f"[SatietyComponent] Entity {self.entity} is hungry (satiety: {self.satiety:.2f})"
             )

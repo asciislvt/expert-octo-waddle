@@ -41,6 +41,9 @@ class AiSeekFoodBehavior(AiBehavior):
             else:
                 print("\tNo grazeable entities found within seek radius.")
 
+        self.target_entity = None
+        if self.brain_component is None:
+            self.brain_component.target_grazeable = None
         return 0.0
 
     def get_steering_vector(self, input_data: AiInputData) -> kn.Vec2:

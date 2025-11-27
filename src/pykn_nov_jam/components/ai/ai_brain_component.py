@@ -52,10 +52,7 @@ class AiBrainComponent(Component):
                     return
 
             print(f"Processing behavior: {behavior.__class__.__name__}")
-            weight = (
-                behavior.evaluate_behavior(delta_time, self.input_data)
-                * behavior.priority
-            )
+            weight = behavior.evaluate_behavior(delta_time, self.input_data)
             behavior.weight = weight
             print(f"\tBehavior weight: {weight}")
 
