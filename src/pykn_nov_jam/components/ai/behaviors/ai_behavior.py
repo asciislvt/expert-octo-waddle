@@ -7,13 +7,16 @@ from pykn_nov_jam.entities.entity import Entity
 
 
 class AiBehavior(Component):
-    def __init__(self, entity: Entity, priority: int) -> None:
+    def __init__(
+        self, entity: Entity, priority: int, is_exclusive: bool = False
+    ) -> None:
         super().__init__(entity)
         self.priority: int = priority
         self.weight: float = 0.0
         self.steering: AiSteeringComponent | None = entity.get_component(
             AiSteeringComponent
         )  # type: ignore
+        self.is_exclusive: bool = is_exclusive
 
     def evaluate_behavior(self, delta_time: float, input_data: AiInputData) -> float:
         return 0.0

@@ -1,25 +1,31 @@
+from typing import Callable
+
 import pykraken as kn
 
-from typing import Callable
+from pykn_nov_jam.components.ai.ai_brain_component import AiBrainComponent
+from pykn_nov_jam.components.ai.ai_steering_component import AiSteeringComponent
+from pykn_nov_jam.components.ai.behaviors.ai_follow_behavior import AiFollowBehavior
+from pykn_nov_jam.components.ai.behaviors.ai_grazing_behavior import AiGrazingBehavior
+from pykn_nov_jam.components.ai.behaviors.ai_seek_food_behavior import (
+    AiSeekFoodBehavior,
+)
+from pykn_nov_jam.components.ai.behaviors.ai_wander_behavior import AiWanderBehavior
+from pykn_nov_jam.components.collision_component import CollisionComponent
+from pykn_nov_jam.components.grazeable_component import GrazeableComponent
 from pykn_nov_jam.components.interaction.interactable_component import (
     InteractableComponent,
 )
 from pykn_nov_jam.components.interaction.interaction_component import (
     InteractionComponent,
 )
-from pykn_nov_jam.components.satiety_component import SatietyComponent
-from pykn_nov_jam.globals import Globals
-from pykn_nov_jam.components.label_component import LabelComponent
-from pykn_nov_jam.components.ai.ai_brain_component import AiBrainComponent
-from pykn_nov_jam.components.ai.behaviors.ai_follow_behavior import AiFollowBehavior
-from pykn_nov_jam.components.ai.behaviors.ai_wander_behavior import AiWanderBehavior
-from pykn_nov_jam.components.ai.ai_steering_component import AiSteeringComponent
-from pykn_nov_jam.components.collision_component import CollisionComponent
 from pykn_nov_jam.components.key_input_component import KeyInputComponent
+from pykn_nov_jam.components.label_component import LabelComponent
 from pykn_nov_jam.components.movement_component import MovementComponent
+from pykn_nov_jam.components.satiety_component import SatietyComponent
 from pykn_nov_jam.components.sprite_component import SpriteComponent
 from pykn_nov_jam.components.whistle_component import WhistleComponent
 from pykn_nov_jam.entities.entity import Entity
+from pykn_nov_jam.globals import Globals
 
 
 class EntityPrefabs:
@@ -77,12 +83,26 @@ class EntityPrefabs:
         sheep.add_component(SatietyComponent(sheep, 100.0))
 
         brain: AiBrainComponent = AiBrainComponent(sheep)
+        sheep.add_component(brain)
         brain.add_behavior(AiFollowBehavior(sheep, 2))
         brain.add_behavior(AiWanderBehavior(sheep, 1))
-        sheep.add_component(brain)
+        brain.add_behavior(AiSeekFoodBehavior(sheep, 3))
+        brain.add_behavior(AiGrazingBehavior(sheep, 4))
 
         # print("Sheep entity created at position: %r" % position)
         return sheep
+
+    @staticmethod
+    def create_grazing_field(position: kn.Vec2, custom_params: dict = {}) -> Entity:
+        grazing_field: Entity = Entity(position)
+
+        grazing_field.add_component(GrazeableComponent(grazing_field, 64))
+        grazing_field.add_component(
+            CollisionComponent(
+                grazing_field, kn.Rect(grazing_field.position, 1, 1), "area"
+            )
+        )
+        return grazing_field
 
     @staticmethod
     def create_container(position: kn.Vec2, custom_params: dict = {}) -> Entity:
@@ -180,4 +200,5 @@ class EntityPrefabs:
         "Sheep": create_sheep,
         "Container": create_container,
         "Door": create_door,
+        "GrazingField": create_grazing_field,
     }

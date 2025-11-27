@@ -62,6 +62,11 @@ class CollisionSystem:
                     if collision_a.enabled is False or collision_b.enabled is False:
                         # print("CollisionComponent disabled, skipping collision check.")
                         continue
+                    if (
+                        collision_a.body_type == "area"
+                        or collision_b.body_type == "area"
+                    ):
+                        continue
 
                     if self.is_colliding(
                         collision_a.get_collider(), collision_b.get_collider()
@@ -88,6 +93,8 @@ class CollisionSystem:
             )
 
             if neighbor_collision.enabled is False:
+                continue
+            if neighbor_collision.body_type == "area":
                 continue
 
             neighbor_collider: kn.Rect = neighbor_collision.get_collider()
@@ -123,6 +130,8 @@ class CollisionSystem:
 
         if collision_a.body_type == "static" and collision_b.body_type == "static":
             return
+        if collision_a.body_type == "area" or collision_b.body_type == "area":
+            return
         if collision_a.body_type == "dynamic" and collision_b.body_type == "static":
             self.resolve_collision(entity_a, entity_b)
             return
@@ -131,11 +140,6 @@ class CollisionSystem:
             return
 
         # TODO: Implement collision callbacks
-        #
-        # if collision_a.on_collide is not None:
-        #     collision_a.on_collide(entity_a, entity_b)
-        # if collision_b.on_collide is not None:
-        #     collision_b.on_collide(entity_b, entity_a)
 
     def resolve_collision(self, entity_a: Entity, entity_b: Entity) -> None:
         collision_a: CollisionComponent = entity_a.get_component(  # type: ignore

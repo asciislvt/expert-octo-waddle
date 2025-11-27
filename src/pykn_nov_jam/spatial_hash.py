@@ -60,6 +60,41 @@ class SpatialHash:
 
         return result
 
+    def get_neighbors_within_radius(
+        self, entity: Entity, radius: float, component_type: type | None
+    ) -> list[Entity]:
+        result: list[Entity] = []
+
+        cx, cy = entity.position.x, entity.position.y
+        cx_min = math.floor((cx - radius) / self.cell_size)
+        cy_min = math.floor((cy - radius) / self.cell_size)
+        cx_max = math.floor((cx + radius) / self.cell_size)
+        cy_max = math.floor((cy + radius) / self.cell_size)
+
+        searched_entities: set[Entity] = set()
+        for cell_y in range(cy_min, cy_max + 1):
+            for cell_x in range(cx_min, cx_max + 1):
+                cell_pos = kn.Vec2(cell_x, cell_y)
+                if cell_pos not in self.cells:
+                    continue
+                for entity_in_cell in self.cells[cell_pos]:
+                    if entity_in_cell == entity:
+                        continue
+                    if entity_in_cell in searched_entities:
+                        continue
+                    searched_entities.add(entity)
+
+                    if component_type is None:
+                        distance = entity.position.distance_to(entity_in_cell.position)
+                        if distance <= radius:
+                            result.append(entity_in_cell)
+                    elif entity_in_cell.has_component(component_type):
+                        distance = entity.position.distance_to(entity_in_cell.position)
+                        if distance <= radius:
+                            result.append(entity_in_cell)
+
+        return result
+
     def get_neighbor_cells(self, cell_position: kn.Vec2) -> list[kn.Vec2]:
         result: list[kn.Vec2] = []
         for x in range(-1, 2):

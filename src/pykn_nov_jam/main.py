@@ -4,7 +4,7 @@ from pykn_nov_jam.scenes.scene_manager import SceneManager
 from pykn_nov_jam.globals import Globals
 
 kn.init()
-kn.window.create("The Herdsman", kn.Vec2(480, 432))
+kn.window.create("The Herdsman", kn.Vec2(960, 864))
 kn.time.set_target(60)
 
 global_singleton = Globals()

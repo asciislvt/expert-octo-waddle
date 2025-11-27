@@ -12,11 +12,13 @@ class AiBrainComponent(Component):
         super().__init__(entity)
         self.steering: AiSteeringComponent = entity.get_component(AiSteeringComponent)  # type: ignore
         self.input_data: AiInputData = AiInputData()
+        self.target_grazeable: Entity | None = None
         self.behaviors: list[AiBehavior] = []
         # TODO: Implement fear levels
 
     def add_behavior(self, behavior: AiBehavior) -> None:
         self.behaviors.append(behavior)
+        self.behaviors.sort(key=lambda b: b.priority, reverse=True)
 
     def set_input_data(self, input_data: AiInputData) -> None:
         self.input_data = input_data
@@ -34,9 +36,26 @@ class AiBrainComponent(Component):
             if behavior.enabled is False:
                 continue
 
-            # print(f"Processing behavior: {behavior.__class__.__name__}")
-            print(f"Behavior: {behavior.__class__.__name__}")
-            weight = behavior.evaluate_behavior(delta_time, self.input_data)
+            if behavior.is_exclusive:
+                weight = behavior.evaluate_behavior(delta_time, self.input_data)
+
+                if weight > 0.0:
+                    behavior.weight = weight
+                    print(f"\tBehavior {behavior.__class__.__name__} is exclusive!")
+                    steering_result = behavior.get_steering_vector(self.input_data)
+                    print(f"\tSet input direction to {steering_result}")
+                    if steering_result.length > 0:
+                        steering_result.normalize()
+
+                    self.steering.input_direction = steering_result
+                    print("-----")
+                    return
+
+            print(f"Processing behavior: {behavior.__class__.__name__}")
+            weight = (
+                behavior.evaluate_behavior(delta_time, self.input_data)
+                * behavior.priority
+            )
             behavior.weight = weight
             print(f"\tBehavior weight: {weight}")
 

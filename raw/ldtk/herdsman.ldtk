@@ -10,7 +10,7 @@
 	},
 	"iid": "728feb90-ac70-11f0-a730-e5718d199314",
 	"jsonVersion": "1.5.3",
-	"appBuildId": 489801,
+	"appBuildId": 489766,
 	"nextUid": 28,
 	"identifierStyle": "Capitalize",
 	"toc": [],
@@ -330,12 +330,12 @@
 			"fieldDefs": []
 		},
 		{
-			"identifier": "Grazeable",
+			"identifier": "GrazingField",
 			"uid": 25,
 			"tags": [],
 			"exportToToc": false,
 			"allowOutOfBounds": false,
-			"doc": "Sheep can eat this",
+			"doc": "Sheep can eat here",
 			"width": 8,
 			"height": 8,
 			"resizableX": false,
@@ -631,8 +631,8 @@
 							"px": [164,148],
 							"fieldInstances": [
 								{ "__identifier": "accel", "__type": "Float", "__value": 100, "__tile": null, "defUid": 7, "realEditorValues": [] },
-								{ "__identifier": "decel", "__type": "Float", "__value": 15, "__tile": null, "defUid": 8, "realEditorValues": [] },
-								{ "__identifier": "max_speed", "__type": "Float", "__value": 100, "__tile": null, "defUid": 9, "realEditorValues": [] }
+								{ "__identifier": "decel", "__type": "Float", "__value": 10, "__tile": null, "defUid": 8, "realEditorValues": [{ "id": "V_Float", "params": [10] }] },
+								{ "__identifier": "max_speed", "__type": "Float", "__value": 80, "__tile": null, "defUid": 9, "realEditorValues": [{ "id": "V_Float", "params": [80] }] }
 							],
 							"__worldX": 164,
 							"__worldY": 148
@@ -814,7 +814,7 @@
 							"__worldY": 128
 						},
 						{
-							"__identifier": "Grazeable",
+							"__identifier": "GrazingField",
 							"__grid": [24,3],
 							"__pivot": [0,0],
 							"__tags": [],
@@ -826,14 +826,14 @@
 							"defUid": 25,
 							"px": [192,24],
 							"fieldInstances": [
-								{ "__identifier": "eating_radius", "__type": "Float", "__value": 128, "__tile": null, "defUid": 26, "realEditorValues": [{ "id": "V_Float", "params": [128] }] },
+								{ "__identifier": "eating_radius", "__type": "Float", "__value": 160, "__tile": null, "defUid": 26, "realEditorValues": [{ "id": "V_Float", "params": [160] }] },
 								{ "__identifier": "grazeable_health", "__type": "Float", "__value": 64, "__tile": null, "defUid": 27, "realEditorValues": [] }
 							],
 							"__worldX": 192,
 							"__worldY": 24
 						},
 						{
-							"__identifier": "Grazeable",
+							"__identifier": "GrazingField",
 							"__grid": [27,28],
 							"__pivot": [0,0],
 							"__tags": [],
@@ -845,7 +845,7 @@
 							"defUid": 25,
 							"px": [216,224],
 							"fieldInstances": [
-								{ "__identifier": "eating_radius", "__type": "Float", "__value": 128, "__tile": null, "defUid": 26, "realEditorValues": [{ "id": "V_Float", "params": [128] }] },
+								{ "__identifier": "eating_radius", "__type": "Float", "__value": 160, "__tile": null, "defUid": 26, "realEditorValues": [{ "id": "V_Float", "params": [160] }] },
 								{ "__identifier": "grazeable_health", "__type": "Float", "__value": 64, "__tile": null, "defUid": 27, "realEditorValues": [] }
 							],
 							"__worldX": 216,

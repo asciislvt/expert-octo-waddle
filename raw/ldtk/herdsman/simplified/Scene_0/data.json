@@ -31,8 +31,8 @@
 				"color": 2943221,
 				"customFields": {
 					"accel": 100,
-					"decel": 15,
-					"max_speed": 100
+					"decel": 10,
+					"max_speed": 80
 				}
 			}
 		],
@@ -163,9 +163,9 @@
 				"customFields" : {}
 			}
 		],
-		"Grazeable": [
+		"GrazingField": [
 			{
-				"id": "Grazeable",
+				"id": "GrazingField",
 				"iid": "17eec490-ac70-11f0-b432-7701ec1d2aa9",
 				"layer": "Entities",
 				"x": 192,
@@ -174,12 +174,12 @@
 				"height": 8,
 				"color": 6539085,
 				"customFields": {
-					"eating_radius": 128,
+					"eating_radius": 160,
 					"grazeable_health": 64
 				}
 			},
 			{
-				"id": "Grazeable",
+				"id": "GrazingField",
 				"iid": "4d16dc70-ac70-11f0-b432-356a5d02f309",
 				"layer": "Entities",
 				"x": 216,
@@ -188,7 +188,7 @@
 				"height": 8,
 				"color": 6539085,
 				"customFields": {
-					"eating_radius": 128,
+					"eating_radius": 160,
 					"grazeable_health": 64
 				}
 			}

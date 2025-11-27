@@ -9,8 +9,9 @@ class AiFollowBehavior(AiBehavior):
     def __init__(self, entity: Entity, priority: int) -> None:
         super().__init__(entity, priority)
         self.wander_radius: float = 50.0
-        self.follow_distance: float = 48.0
+        self.follow_distance: float = 60.0
         self.max_whistle_distance: float = 128.0
+        self.follow_falloff: float = 0.8
 
     def evaluate_behavior(self, delta_time: float, input_data: AiInputData) -> float:
         distance_to_player = (input_data.player_position - self.entity.position).length
@@ -24,8 +25,10 @@ class AiFollowBehavior(AiBehavior):
                 distance_to_player < self.follow_distance
                 and input_data.fear_level < 0.5
             ):
-                print("\tPlayer within follow distance.")
-                return 0.75
+                return (
+                    1.2
+                    - (distance_to_player / self.follow_distance) * self.follow_falloff
+                )
 
         return 0.0
 
