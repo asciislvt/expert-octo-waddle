@@ -15,10 +15,10 @@ class AiFollowBehavior(AiBehavior):
 
     def evaluate_behavior(self, delta_time: float, input_data: AiInputData) -> float:
         distance_to_player = (input_data.player_position - self.entity.position).length
-        print(f"\tDistance to Player: {distance_to_player}")
+        # print(f"\tDistance to Player: {distance_to_player}")
         if input_data.whistle and input_data.fear_level < 0.7:
             if distance_to_player < self.max_whistle_distance:
-                print("\tWhistle detected within range.")
+                # print("\tWhistle detected within range.")
                 return 1.0
         else:
             if (

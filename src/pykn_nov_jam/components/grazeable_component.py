@@ -17,6 +17,7 @@ class GrazeableComponent(Component):
 
     # def process_draw(self) -> None:
     #     kn.draw.circle(
-    #         kn.Circle(self.entity.position, self.eating_radius),
-    #         kn.Color(0, 255, 0, 100),
+    #         kn.Circle(self.entity.position, self.min_eating_radius),
+    #         kn.Color(0, 255, 0, 1),
+    #         False,
     #     )

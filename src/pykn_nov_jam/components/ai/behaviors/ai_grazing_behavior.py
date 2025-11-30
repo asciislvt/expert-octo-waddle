@@ -33,9 +33,9 @@ class AiGrazingBehavior(AiBehavior):
         )
 
         if distance_to_grazeable <= grazeable_component.min_eating_radius:
-            print(
-                f"\tEntity is within minimum eating radius of grazeable {target_grazeable}. Grazing behavior activated."
-            )
+            # print(
+            #     f"\tEntity is within minimum eating radius of grazeable {target_grazeable}. Grazing behavior activated."
+            # )
             if self.satiety_component.satiety == self.satiety_component.max_satiety:
                 print("Entity is full!")
                 return 0.0

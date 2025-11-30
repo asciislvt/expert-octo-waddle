@@ -18,6 +18,7 @@ from pykn_nov_jam.components.interaction.interactable_component import (
 from pykn_nov_jam.components.interaction.interaction_component import (
     InteractionComponent,
 )
+from pykn_nov_jam.components.intimidation_component import IntimidationComponent
 from pykn_nov_jam.components.key_input_component import KeyInputComponent
 from pykn_nov_jam.components.label_component import LabelComponent
 from pykn_nov_jam.components.movement_component import MovementComponent
@@ -93,6 +94,30 @@ class EntityPrefabs:
         return sheep
 
     @staticmethod
+    def create_chupacabra(position: kn.Vec2, custom_params: dict = {}) -> Entity:
+        chupacabra: Entity = Entity(position)
+
+        chupacabra.add_component(AiSteeringComponent(chupacabra))
+        chupacabra.add_component(MovementComponent(chupacabra, 80, 15, 30))
+        chupacabra.add_component(
+            CollisionComponent(chupacabra, kn.Rect(chupacabra.position, 16, 16))
+        )
+        chupacabra.add_component(
+            SpriteComponent(chupacabra, "assets/sprites/chupacabra.png")
+        )
+        chupacabra.add_component(IntimidationComponent(chupacabra))
+        # chupacabra.add_component(SatietyComponent(chupacabra, 150.0))
+
+        brain: AiBrainComponent = AiBrainComponent(chupacabra)
+        chupacabra.add_component(brain)
+        # brain.add_behavior(AiFollowBehavior(chupacabra, 2))
+        brain.add_behavior(AiWanderBehavior(chupacabra, 1))
+        # brain.add_behavior(AiSeekFoodBehavior(chupacabra, 3))
+
+        # print("Chupacabra entity created at position: %r" % position)
+        return chupacabra
+
+    @staticmethod
     def create_grazing_field(position: kn.Vec2, custom_params: dict = {}) -> Entity:
         grazing_field: Entity = Entity(position)
 
@@ -101,6 +126,9 @@ class EntityPrefabs:
             CollisionComponent(
                 grazing_field, kn.Rect(grazing_field.position, 1, 1), "area"
             )
+        )
+        grazing_field.add_component(
+            SpriteComponent(grazing_field, "assets/sprites/container-chest.png", 32, 32)
         )
         return grazing_field
 
@@ -198,6 +226,7 @@ class EntityPrefabs:
     entity_types: dict[str, Callable] = {
         "Player": create_player,
         "Sheep": create_sheep,
+        "Chupacabra": create_chupacabra,
         "Container": create_container,
         "Door": create_door,
         "GrazingField": create_grazing_field,

@@ -50,17 +50,6 @@
 			},
 			{
 				"id": "Sheep",
-				"iid": "613ede20-ac70-11f0-b702-89186f6c4e0e",
-				"layer": "Entities",
-				"x": 44,
-				"y": 132,
-				"width": 8,
-				"height": 8,
-				"color": 6539085,
-				"customFields" : {}
-			},
-			{
-				"id": "Sheep",
 				"iid": "62c90090-ac70-11f0-b702-3d8f85454f8b",
 				"layer": "Entities",
 				"x": 60,
@@ -76,6 +65,105 @@
 				"layer": "Entities",
 				"x": 116,
 				"y": 36,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			},
+			{
+				"id": "Sheep",
+				"iid": "c2610a00-ac70-11f0-b72c-7deb2eacfcab",
+				"layer": "Entities",
+				"x": 92,
+				"y": 140,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			},
+			{
+				"id": "Sheep",
+				"iid": "c3417ef0-ac70-11f0-b72c-d56198e6d342",
+				"layer": "Entities",
+				"x": 68,
+				"y": 140,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			},
+			{
+				"id": "Sheep",
+				"iid": "c3c295d0-ac70-11f0-b72c-edc145e24c01",
+				"layer": "Entities",
+				"x": 92,
+				"y": 124,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			},
+			{
+				"id": "Sheep",
+				"iid": "c58f6690-ac70-11f0-b72c-254438d4881f",
+				"layer": "Entities",
+				"x": 156,
+				"y": 60,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			},
+			{
+				"id": "Sheep",
+				"iid": "c5fa5d60-ac70-11f0-b72c-3fc43759e465",
+				"layer": "Entities",
+				"x": 148,
+				"y": 84,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			},
+			{
+				"id": "Sheep",
+				"iid": "c6b8a450-ac70-11f0-b72c-f96dbeba60d0",
+				"layer": "Entities",
+				"x": 164,
+				"y": 116,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			},
+			{
+				"id": "Sheep",
+				"iid": "c732b650-ac70-11f0-b72c-37dadbf35fc4",
+				"layer": "Entities",
+				"x": 148,
+				"y": 108,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			},
+			{
+				"id": "Sheep",
+				"iid": "c7a04530-ac70-11f0-b72c-f11ded47c06f",
+				"layer": "Entities",
+				"x": 124,
+				"y": 124,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			},
+			{
+				"id": "Sheep",
+				"iid": "c81a5730-ac70-11f0-b72c-0ddad92bf2e5",
+				"layer": "Entities",
+				"x": 180,
+				"y": 92,
 				"width": 8,
 				"height": 8,
 				"color": 6539085,
@@ -191,6 +279,41 @@
 					"eating_radius": 160,
 					"grazeable_health": 64
 				}
+			}
+		],
+		"Chupacabra": [
+			{
+				"id": "Chupacabra",
+				"iid": "cd022d20-ac70-11f0-bdd3-89c385dabb82",
+				"layer": "Entities",
+				"x": 132,
+				"y": 196,
+				"width": 8,
+				"height": 8,
+				"color": 12470831,
+				"customFields" : {}
+			},
+			{
+				"id": "Chupacabra",
+				"iid": "c7845060-ac70-11f0-bdd3-39856fab8cb7",
+				"layer": "Entities",
+				"x": 140,
+				"y": 36,
+				"width": 8,
+				"height": 8,
+				"color": 12470831,
+				"customFields" : {}
+			},
+			{
+				"id": "Chupacabra",
+				"iid": "ca478f10-ac70-11f0-bdd3-d16eddac342a",
+				"layer": "Entities",
+				"x": 220,
+				"y": 172,
+				"width": 8,
+				"height": 8,
+				"color": 12470831,
+				"customFields" : {}
 			}
 		]
 	}
