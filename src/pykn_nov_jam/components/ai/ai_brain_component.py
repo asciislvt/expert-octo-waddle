@@ -64,7 +64,7 @@ class AiBrainComponent(Component):
 
         # print(f"Total steering weight: {total_weight}")
         if total_weight > 0.0:
-            steering_result /= total_weight
+            # steering_result /= total_weight
             steering_result.normalize()
             # print(f"Steering result vector: {steering_result}")
             if steering_result.length > 0:

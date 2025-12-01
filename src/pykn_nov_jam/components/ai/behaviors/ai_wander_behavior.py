@@ -14,7 +14,7 @@ class AiWanderBehavior(AiBehavior):
 
     def evaluate_behavior(self, delta_time: float, input_data: AiInputData) -> float:
         if input_data.fear_level < 0.6:
-            print(f"\tFear Level: {input_data.fear_level}")
+            # print(f"\tFear Level: {input_data.fear_level}")
             return 0.6
         return 0.2
 

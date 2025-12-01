@@ -1,4 +1,5 @@
 import pykraken as kn
+
 from pykn_nov_jam.components.ai.ai_input_data import AiInputData
 from pykn_nov_jam.components.ai.behaviors.ai_behavior import AiBehavior
 from pykn_nov_jam.components.intimidation_component import IntimidationComponent
@@ -19,8 +20,24 @@ class AiFleeIntimidator(AiBehavior):
         intimitators = input_data.spatial_hash.get_neighbor_entites_with_component(
             self.entity, IntimidationComponent
         )
+        intimitator = self.get_nearest_entity(self.entity, intimitators)
+        if intimitator is not None:
+            self.nearest_intimidator = intimitator
+            print(f"Found nearest intimidator at position {intimitator.position}")
+            return 1.0  # Need to flee
 
         return 0.0  # No need to flee
+
+    def get_steering_vector(self, input_data: AiInputData) -> kn.Vec2:
+        result: kn.Vec2 = kn.Vec2(0, 0)
+        if self.nearest_intimidator is None:
+            print("AiFleeIntimidator: No nearest intimidator found!")
+            return result
+        if self.steering is None:
+            print("AiFleeIntimidator: No steering component found!")
+            return result
+        result = self.steering.seek(self.nearest_intimidator.position, True)
+        return result
 
     def get_nearest_entity(
         self, entity: Entity, neighbors: list[Entity]
@@ -39,6 +56,3 @@ class AiFleeIntimidator(AiBehavior):
                 result = neighbor
 
         return result
-
-    def get_steering_vector(self, input_data: AiInputData) -> kn.Vec2:
-        pass

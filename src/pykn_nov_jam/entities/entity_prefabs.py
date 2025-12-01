@@ -4,6 +4,7 @@ import pykraken as kn
 
 from pykn_nov_jam.components.ai.ai_brain_component import AiBrainComponent
 from pykn_nov_jam.components.ai.ai_steering_component import AiSteeringComponent
+from pykn_nov_jam.components.ai.behaviors.ai_flee_intimidator import AiFleeIntimidator
 from pykn_nov_jam.components.ai.behaviors.ai_follow_behavior import AiFollowBehavior
 from pykn_nov_jam.components.ai.behaviors.ai_grazing_behavior import AiGrazingBehavior
 from pykn_nov_jam.components.ai.behaviors.ai_seek_food_behavior import (
@@ -17,6 +18,9 @@ from pykn_nov_jam.components.interaction.interactable_component import (
 )
 from pykn_nov_jam.components.interaction.interaction_component import (
     InteractionComponent,
+)
+from pykn_nov_jam.components.inventory.randomized_container_component import (
+    RandomizedContainerComponent,
 )
 from pykn_nov_jam.components.intimidation_component import IntimidationComponent
 from pykn_nov_jam.components.key_input_component import KeyInputComponent
@@ -89,6 +93,7 @@ class EntityPrefabs:
         brain.add_behavior(AiWanderBehavior(sheep, 1))
         brain.add_behavior(AiSeekFoodBehavior(sheep, 3))
         brain.add_behavior(AiGrazingBehavior(sheep, 4))
+        brain.add_behavior(AiFleeIntimidator(sheep, 5))
 
         # print("Sheep entity created at position: %r" % position)
         return sheep
@@ -106,13 +111,10 @@ class EntityPrefabs:
             SpriteComponent(chupacabra, "assets/sprites/chupacabra.png")
         )
         chupacabra.add_component(IntimidationComponent(chupacabra))
-        # chupacabra.add_component(SatietyComponent(chupacabra, 150.0))
 
         brain: AiBrainComponent = AiBrainComponent(chupacabra)
         chupacabra.add_component(brain)
-        # brain.add_behavior(AiFollowBehavior(chupacabra, 2))
         brain.add_behavior(AiWanderBehavior(chupacabra, 1))
-        # brain.add_behavior(AiSeekFoodBehavior(chupacabra, 3))
 
         # print("Chupacabra entity created at position: %r" % position)
         return chupacabra
@@ -138,6 +140,11 @@ class EntityPrefabs:
 
         def on_interact(entity: Entity) -> None:
             print("Interacted with container at position: %r" % entity.position)
+            randomized_container: RandomizedContainerComponent = entity.get_component(
+                RandomizedContainerComponent
+            )  # type: ignore
+            items = randomized_container.use_container()
+            print(f"Found items: {items}")
 
         container.add_component(
             SpriteComponent(container, "assets/sprites/container-chest.png")
@@ -146,6 +153,7 @@ class EntityPrefabs:
             CollisionComponent(container, kn.Rect(container.position, 16, 16))
         )
         container.add_component(InteractableComponent(container, on_interact))
+        container.add_component(RandomizedContainerComponent(container))
         container.add_component(
             LabelComponent(
                 container, "Container\n (F) - Use", kn.color.WHITE, kn.Vec2(14, -24)
