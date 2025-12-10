@@ -23,7 +23,7 @@ class AiFleeIntimidator(AiBehavior):
         intimitator = self.get_nearest_entity(self.entity, intimitators)
         if intimitator is not None:
             self.nearest_intimidator = intimitator
-            print(f"Found nearest intimidator at position {intimitator.position}")
+            # print(f"Found nearest intimidator at position {intimitator.position}")
             return 1.0  # Need to flee
 
         return 0.0  # No need to flee

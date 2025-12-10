@@ -19,10 +19,10 @@ from pykn_nov_jam.components.interaction.interactable_component import (
 from pykn_nov_jam.components.interaction.interaction_component import (
     InteractionComponent,
 )
+from pykn_nov_jam.components.intimidation_component import IntimidationComponent
 from pykn_nov_jam.components.inventory.randomized_container_component import (
     RandomizedContainerComponent,
 )
-from pykn_nov_jam.components.intimidation_component import IntimidationComponent
 from pykn_nov_jam.components.key_input_component import KeyInputComponent
 from pykn_nov_jam.components.label_component import LabelComponent
 from pykn_nov_jam.components.movement_component import MovementComponent
@@ -31,6 +31,7 @@ from pykn_nov_jam.components.sprite_component import SpriteComponent
 from pykn_nov_jam.components.whistle_component import WhistleComponent
 from pykn_nov_jam.entities.entity import Entity
 from pykn_nov_jam.globals import Globals
+from pykn_nov_jam.systems.emote_system import EmoteSystem
 
 
 class EntityPrefabs:
@@ -153,12 +154,12 @@ class EntityPrefabs:
             CollisionComponent(container, kn.Rect(container.position, 16, 16))
         )
         container.add_component(InteractableComponent(container, on_interact))
-        container.add_component(RandomizedContainerComponent(container))
         container.add_component(
             LabelComponent(
                 container, "Container\n (F) - Use", kn.color.WHITE, kn.Vec2(14, -24)
             )
         )
+        container.add_component(RandomizedContainerComponent(container))
 
         return container
 

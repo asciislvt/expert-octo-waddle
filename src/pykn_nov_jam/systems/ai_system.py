@@ -20,7 +20,7 @@ class AiSystem:
 
     def process_ai(self, delta_time: float) -> None:
         entity_list = self.entity_manager.get_entities_with_component(AiBrainComponent)
-        print(f"Processing AI for {len(entity_list)} entities.")
+        # print(f"Processing AI for {len(entity_list)} entities.")
         player = Globals._instance.get_player_entity() if Globals._instance else None
         player_whistle: WhistleComponent = (
             player.get_component(WhistleComponent) if player else None

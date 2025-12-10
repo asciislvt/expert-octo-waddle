@@ -7,6 +7,7 @@ from pykn_nov_jam.scenes.level_data import LevelData
 from pykn_nov_jam.spatial_hash import SpatialHash
 from pykn_nov_jam.systems.ai_system import AiSystem
 from pykn_nov_jam.systems.collision_system import CollisionSystem
+from pykn_nov_jam.systems.emote_system import EmoteSystem
 from pykn_nov_jam.systems.interaction_system import InteractionSystem
 
 
@@ -21,6 +22,7 @@ class Scene:
             self.entity_manager, self.spatial_hash
         )
         self.ai_system = AiSystem(self.entity_manager, self.spatial_hash)
+        self.emote_system = EmoteSystem(self.entity_manager)
         self.visual_layers: dict[int, kn.Texture] = level_data.sprite_layers
 
         for entity in level_data.entities:

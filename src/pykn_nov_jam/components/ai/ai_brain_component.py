@@ -48,7 +48,7 @@ class AiBrainComponent(Component):
                         steering_result.normalize()
 
                     self.steering.input_direction = steering_result
-                    print("-----")
+                    # print("-----")
                     return
 
             # print(f"Processing behavior: {behavior.__class__.__name__}")
